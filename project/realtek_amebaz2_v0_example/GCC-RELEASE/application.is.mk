@@ -1,3 +1,4 @@
+SHELL = /bin/bash
 
 # Initialize tool chain
 # -------------------------------------------------------------------
@@ -10,6 +11,9 @@ AMEBAZ2_ROMSYMDIR = $(AMEBAZ2_BSPDIR)/ROM
 
 DUMP_START_ADDRESS = 0x98000000
 DUMP_END_ADDRESS = 0x98200000
+
+BASEDIR := $(shell pwd)
+CHIPDIR = $(BASEDIR)/../../../../connectedhomeip
 
 OS := $(shell uname)
 
@@ -57,6 +61,10 @@ ROMIMG =
 INCLUDES =
 INCLUDES += -I../inc
 
+INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include
+INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include/mbedtls
+INCLUDES += -I$(CHIPDIR)/config/ambd
+
 INCLUDES += -I../../../component/common/api
 INCLUDES += -I../../../component/common/api/at_cmd
 INCLUDES += -I../../../component/common/api/platform
@@ -80,11 +88,11 @@ INCLUDES += -I../../../component/common/network
 INCLUDES += -I../../../component/common/network/coap/include
 INCLUDES += -I../../../component/common/network/libcoap/include
 INCLUDES += -I../../../component/common/network/http2/nghttp2-1.31.0/includes
-INCLUDES += -I../../../component/common/network/lwip/lwip_v2.0.2/src/include
-INCLUDES += -I../../../component/common/network/lwip/lwip_v2.0.2/src/include/lwip
-INCLUDES += -I../../../component/common/network/lwip/lwip_v2.0.2/port/realtek
-INCLUDES += -I../../../component/common/network/lwip/lwip_v2.0.2/port/realtek/freertos
-INCLUDES += -I../../../component/common/network/ssl/mbedtls-2.4.0/include
+INCLUDES += -I../../../component/common/network/lwip/lwip_v2.1.2/src/include
+INCLUDES += -I../../../component/common/network/lwip/lwip_v2.1.2/src/include/lwip
+INCLUDES += -I../../../component/common/network/lwip/lwip_v2.1.2/port/realtek
+INCLUDES += -I../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freertos
+#INCLUDES += -I../../../component/common/network/ssl/mbedtls-2.4.0/include
 INCLUDES += -I../../../component/common/network/ssl/ssl_ram_map/rom
 INCLUDES += -I../../../component/common/drivers/wlan/realtek/include
 INCLUDES += -I../../../component/common/drivers/wlan/realtek/src/osdep
@@ -279,6 +287,7 @@ SRC_C += ../../../component/common/utilities/tcptest.c
 SRC_C += ../../../component/common/api/network/src/wlan_network.c
 
 #utilities
+SRC_C += ../../../component/common/utilities/chip_porting.c
 SRC_C += ../../../component/common/utilities/cJSON.c
 SRC_C += ../../../component/common/utilities/http_client.c
 SRC_C += ../../../component/common/utilities/xml.c
@@ -314,116 +323,150 @@ SRC_C += ../../../component/common/network/sntp/sntp.c
 
 #network - lwip
 #network - lwip - api
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/api_lib.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/api_msg.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/err.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/netbuf.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/netdb.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/netifapi.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/sockets.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/api/tcpip.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/api_lib.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/api_msg.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/err.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/netbuf.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/netdb.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/netifapi.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/sockets.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/api/tcpip.c
 
 #network - lwip - core
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/def.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/dns.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/inet_chksum.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/init.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ip.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/mem.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/memp.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/netif.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/pbuf.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/raw.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/stats.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/sys.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/tcp.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/tcp_in.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/tcp_out.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/timeouts.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/udp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/def.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/dns.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/inet_chksum.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/init.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ip.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/mem.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/memp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/netif.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/pbuf.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/raw.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/stats.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/sys.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/tcp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/tcp_in.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/tcp_out.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/timeouts.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/udp.c
 
 #network - lwip - core - ipv4
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/autoip.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/dhcp.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/etharp.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/icmp.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/igmp.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/ip4.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/ip4_addr.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv4/ip4_frag.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/autoip.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/dhcp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/etharp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/icmp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/igmp.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/ip4.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/ip4_addr.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv4/ip4_frag.c
 
 #network - lwip - core - ipv6
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/dhcp6.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/ethip6.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/icmp6.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/inet6.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/ip6.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/ip6_addr.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/ip6_frag.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/mld6.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/core/ipv6/nd6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/dhcp6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/ethip6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/icmp6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/inet6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/ip6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/ip6_addr.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/ip6_frag.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/mld6.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/core/ipv6/nd6.c
 
 #network - lwip - netif
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/src/netif/ethernet.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/src/netif/ethernet.c
 
 #network - lwip - port
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/port/realtek/freertos/ethernetif.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freertos/ethernetif.c
 SRC_C += ../../../component/common/drivers/wlan/realtek/src/osdep/lwip_intf.c
-SRC_C += ../../../component/common/network/lwip/lwip_v2.0.2/port/realtek/freertos/sys_arch.c
+SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freertos/sys_arch.c
 
 #network - mdns
 SRC_C += ../../../component/common/network/mDNS/mDNSPlatform.c
 
 #network - ssl - mbedtls
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/aesni.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/blowfish.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/camellia.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ccm.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/certs.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/cipher.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/cipher_wrap.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/cmac.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/debug.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/error.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/gcm.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/havege.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/md.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/md2.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/md4.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/md_wrap.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/memory_buffer_alloc.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/net_sockets.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/padlock.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/pkcs11.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/pkcs12.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/pkcs5.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/pkparse.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/platform.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ripemd160.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/sha256.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_cache.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_ciphersuites.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_cli.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_cookie.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_srv.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_ticket.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/ssl_tls.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/threading.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/timing.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/version.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/version_features.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509_create.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509_crl.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509_crt.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509_csr.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509write_crt.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/x509write_csr.c
-SRC_C += ../../../component/common/network/ssl/mbedtls-2.4.0/library/xtea.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/aes.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/aesni.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/arc4.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/aria.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/asn1parse.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/asn1write.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/base64.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/bignum.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/blowfish.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/camellia.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ccm.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/certs.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/chacha20.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/chachapoly.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/cipher.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/cipher_wrap.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/cmac.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ctr_drbg.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/debug.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/des.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/dhm.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ecdh.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ecdsa.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ecjpake.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ecp.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ecp_curves.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/entropy.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/entropy_poll.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/error.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/gcm.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/havege.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/hkdf.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/hmac_drbg.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md2.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md4.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md5.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md_wrap.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/memory_buffer_alloc.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/net_sockets.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/nist_kw.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/oid.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/padlock.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pem.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pk.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pkcs11.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pkcs12.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pkcs5.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pkparse.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pk_wrap.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/pkwrite.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/platform.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/platform_util.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/poly1305.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ripemd160.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/rsa.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/rsa_internal.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/sha1.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/sha256.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/sha512.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_cache.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_ciphersuites.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_cli.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_cookie.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_srv.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_ticket.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_tls.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/threading.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/timing.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/version.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/version_features.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509_create.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509_crl.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509_crt.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509_csr.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509write_crt.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/x509write_csr.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/xtea.c
 
 #network - ssl - ssl_ram_map
 SRC_C += ../../../component/common/network/ssl/ssl_ram_map/rom/rom_ssl_ram_map.c
-SRC_C += ../../../component/common/network/ssl/ssl_func_stubs/ssl_func_stubs.c
+#SRC_C += ../../../component/common/network/ssl/ssl_func_stubs/ssl_func_stubs.c
 
 #network - websocket
 SRC_C += ../../../component/common/network/websocket/wsclient_tls.c
@@ -582,8 +625,13 @@ else
 CFLAGS += -DCONFIG_SYSTEM_TIME64=0
 endif
 
-CFLAGS += -Wstrict-prototypes 
-CPPFLAGS += -std=c++11 -fno-use-cxa-atexit
+CFLAGS += -DCHIP_PROJECT=0
+CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls/mbedtls_config.h\"
+
+CPPFLAGS := $(CFLAGS)
+CPPFLAGS += -fno-use-cxa-atexit
+CPPFLAGS += -std=c++14
+CPPFLAGS += -fno-rtti
 
 LFLAGS = 
 LFLAGS += -Os -march=armv8-m.main+dsp -mthumb -mcmse -mfloat-abi=soft -nostartfiles -nodefaultlibs -nostdlib -specs=nosys.specs

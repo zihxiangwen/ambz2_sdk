@@ -17,9 +17,9 @@
 extern int FreeRTOS_errno;
 #define errno FreeRTOS_errno
 
-bool UTILS_ValidateTimespec( const struct timespec * const pxTimespec )
+BOOL UTILS_ValidateTimespec( const struct timespec * const pxTimespec )
 {
-    bool xReturn = FALSE;
+    BOOL xReturn = FALSE;
 
     if( pxTimespec != NULL )
     {
