@@ -37,6 +37,7 @@ endif
 .PHONY: lib_all
 lib_all: toolchain
 	@$(MAKE) -f lib_chip.mk all
+	@$(MAKE) -f lib_chip_main.mk all
 
 .PHONY: is
 is: toolchain
@@ -49,6 +50,7 @@ mp: toolchain
 .PHONY: clean
 clean:
 	@$(MAKE) -f lib_chip.mk clean
+	@$(MAKE) -f lib_chip_main.mk clean
 	@$(MAKE) -f application.is.mk clean
 
 debug: toolchain
