@@ -156,6 +156,7 @@ int32_t clearPref(char * ns)
 }
 int32_t setPref(char *domain, char *key, uint8_t type, uint8_t *value, size_t byteCount)
 {
+#if 0
     dct_handle_t handle;
     int32_t ret = -1;
     uint32_t prefSize;
@@ -202,11 +203,15 @@ int32_t setPref(char *domain, char *key, uint8_t type, uint8_t *value, size_t by
 exit:
     dct_close_module(&handle);
     return (DCT_SUCCESS == ret ? 1 : 0);
+#else
+	return 1;
+#endif
 
 }
 
 int32_t getPref_u32(char *domain, char *key, uint8_t type, uint32_t *val)
 {
+#if 0
 	dct_handle_t handle;
 	int32_t ret = -1;
 	uint16_t DataLen = 0;
@@ -257,6 +262,9 @@ bail:
 		printf("can't getPref_u32\n");
 		return ret;
 	}
+#else
+	return 1;
+#endif
 }
 
 int32_t getPref_str(char *domain, char *key, uint8_t type, char * buf, size_t *outLen)

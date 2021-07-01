@@ -139,6 +139,11 @@ void sau_setup(ns_region_t *ns_region)
 }
 #endif
 
+#if defined (__GNUC__)
+/* Add This for C++ support to avoid compile error */
+void _fini(void) {}
+#endif
+
 void app_start (void)
 {    
     dbg_printf ("Build @ %s, %s\r\n", __TIME__, __DATE__);
