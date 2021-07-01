@@ -34,6 +34,10 @@ endif
 	@echo Toolchain unzip done!
 
 
+.PHONY: lib_all
+lib_all: toolchain
+	@$(MAKE) -f lib_chip.mk all
+
 .PHONY: is
 is: toolchain
 	@$(MAKE) -f application.is.mk
@@ -44,6 +48,7 @@ mp: toolchain
 
 .PHONY: clean
 clean:
+	@$(MAKE) -f lib_chip.mk clean
 	@$(MAKE) -f application.is.mk clean
 
 debug: toolchain
@@ -51,6 +56,6 @@ debug: toolchain
 
 flash: toolchain
 	@$(MAKE) -f application.is.mk flash
-	
+
 setup:
 	@$(MAKE) -f application.is.mk $(MAKECMDGOALS)	

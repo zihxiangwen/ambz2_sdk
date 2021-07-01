@@ -666,7 +666,7 @@ typedef enum _DBG_CFG_TYPE_ {
 
 typedef struct _DBG_CFG_CMD_ {
 	u8 cmd_name[16];
-	u32	cmd_type;
+	uint32_t	cmd_type;
 } DBG_CFG_CMD, *PDBG_CFG_CMD;
 
 #endif

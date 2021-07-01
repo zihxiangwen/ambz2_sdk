@@ -95,9 +95,9 @@ typedef unsigned int            BOOL;
 #ifndef BOOL
 typedef unsigned char           BOOL;
 #endif
-#ifndef bool
-typedef unsigned char           bool;
-#endif
+//#ifndef bool
+//typedef unsigned char           bool;
+//#endif
 #endif
 
 #define UCHAR                   uint8_t
@@ -241,7 +241,7 @@ typedef int             ssize_t;
 #if defined (__ARM_FEATURE_CMSE)
 #if defined( __ICCARM__ )
 #define NS_ENTRY    __attribute__((cmse_nonsecure_entry))
-typedef __cmse_nonsecure_call void nsfunc(void); 
+typedef __cmse_nonsecure_call void nsfunc(void);
 #else
 #define NS_ENTRY    __attribute__((cmse_nonsecure_entry))
 typedef void __attribute__((cmse_nonsecure_call)) nsfunc(void);
@@ -536,5 +536,87 @@ typedef unsigned char	BOOLEAN,*PBOOLEAN;
 #define __extension__		/* Ignore */
 #define	__restrict			/* Ignore */
 #endif
+
+
+#if CHIP_PROJECT
+//#include <sys/time.h>
+#include <assert.h>
+
+extern size_t strnlen(const char *s, size_t count);
+extern void *pvPortMalloc( size_t xWantedSize );
+//extern char * _strtok_r(register char *s , register const char *delim , char **lasts);
+//extern int _nanosleep( const struct timespec * rqtp, struct timespec * rmtp );
+//extern int _vTaskDelay( const TickType_t xTicksToDelay );
+//extern time_t _time( time_t * tloc );
+
+//def
+#ifndef false
+    #define false   0
+#endif
+
+#ifndef true
+    #define true    1
+#endif
+
+#ifndef strtok_r
+    #define strtok_r(s, delim, lasts)	  _strtok_r (s, delim, lasts)
+#endif
+
+#ifndef usleep
+    #define usleep(x)    _vTaskDelay(x)
+#endif
+
+#ifndef nanosleep
+    #define nanosleep    _nanosleep
+#endif
+
+#ifndef in_addr_t
+    typedef __uint32_t in_addr_t;
+#endif
+
+#define time _time
+
+//undef
+#ifdef bool
+    #undef bool
+#endif
+
+#ifdef strtok
+    #undef strtok
+#endif
+
+#ifdef strtol
+    #undef strtol
+#endif
+
+#ifdef rand
+    #undef rand
+#endif
+
+#ifdef srand
+    #undef srand
+#endif
+
+#ifdef s8
+    #undef s8
+#endif
+
+#ifdef u32
+    #undef u32
+#endif
+
+#ifdef u64
+    #undef u64
+#endif
+
+#ifdef IN
+    #undef IN
+#endif
+
+#ifdef vsnprintf
+    #undef vsnprintf
+#endif
+
+#endif //CHIP_PROJECT
 
 #endif// __BASIC_TYPES_H__
