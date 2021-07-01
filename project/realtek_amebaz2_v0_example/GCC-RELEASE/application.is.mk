@@ -13,7 +13,7 @@ DUMP_START_ADDRESS = 0x98000000
 DUMP_END_ADDRESS = 0x98200000
 
 BASEDIR := $(shell pwd)
-CHIPDIR = $(BASEDIR)/../../../../connectedhomeip
+CHIPDIR = $(BASEDIR)/../../../third_party/connectedhomeip
 
 OS := $(shell uname)
 

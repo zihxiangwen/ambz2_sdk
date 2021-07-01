@@ -5,7 +5,7 @@ SHELL = /bin/bash
 # -------------------------------------------------------------------
 BASEDIR := $(shell pwd)
 AMEBAZ2_TOOLDIR	= $(BASEDIR)/../../../component/soc/realtek/8710c/misc/iar_utility
-CHIPDIR = $(BASEDIR)/../../../../connectedhomeip
+CHIPDIR = $(BASEDIR)/../../../third_party/connectedhomeip
 OUTPUT_DIR = $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip
 
 OS := $(shell uname)
