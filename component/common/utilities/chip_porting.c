@@ -134,6 +134,7 @@ enum {
 
 int32_t initPref(char * ns)
 {
+#if 0
 	int32_t ret;
     ret = dct_init(kPreferencesBeginAddr, kPreferencesDomainNum, kPreferencesKeySize, kPreferencesValueSize, 1, 0);
     ret = dct_register_module(ns);
@@ -142,10 +143,14 @@ int32_t initPref(char * ns)
         printf("dct_register_module failed\n");
     }
     return ret;
+#else
+	return 1;
+#endif
 }
 
 int32_t clearPref(char * ns)
 {
+#if 0
 	int32_t ret;
     ret = dct_unregister_module(ns);
     if (ret != 0)
@@ -153,6 +158,9 @@ int32_t clearPref(char * ns)
         printf("dct_unregister_module failed\n");
     }
     return ret;
+#else
+	return 1;
+#endif
 }
 int32_t setPref(char *domain, char *key, uint8_t type, uint8_t *value, size_t byteCount)
 {
@@ -269,6 +277,7 @@ bail:
 
 int32_t getPref_str(char *domain, char *key, uint8_t type, char * buf, size_t *outLen)
 {
+#if 0
 	dct_handle_t handle;
 	int32_t ret = -1;
 	uint16_t DataLen = 0;
@@ -313,6 +322,9 @@ bail:
 		printf("can't getPref_str\n");
 		return ret;
 	}
+#else
+	return 1;
+#endif
 }
 
 #ifdef __cplusplus

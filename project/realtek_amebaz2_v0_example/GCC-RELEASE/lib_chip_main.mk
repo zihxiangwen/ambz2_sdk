@@ -75,57 +75,6 @@ INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/include
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/src/osdep
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/src/core/option
 INCLUDES += -I$(BASEDIR)/../../../component/common/test
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/app
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/bluetooth/gap
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/bluetooth/profile
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/bluetooth/profile/client
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/bluetooth/profile/server
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/os
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/platform
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/inc/stack
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/lib
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/data_uart
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/hci
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/os
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/vendor_cmd
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_config
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/ble_central
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/ble_peripheral
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/ble_scatternet
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_fuzz_test
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_ota_central_client
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_datatrans
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/cmd
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/common
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/gap
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/inc
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/inc/amebaz2
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/model
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/model/realtek
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/platform
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/profile
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/lib/utility
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/provisioner
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/device
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/api/common
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/api/provisioner
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/api/device
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh/api
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_provisioner_rtk_demo
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_provisioner_rtk_demo/inc
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_device_rtk_demo
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_multiple_profile/device_multiple_profile
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_multiple_profile/provisioner_multiple_profile
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_test
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/src/mcu/module/data_uart_cmd
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/common/inc
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_airsync_config
-INCLUDES += -I$(BASEDIR)/../../../component/common/media/rtp_codec
-INCLUDES += -I$(BASEDIR)/../../../component/common/media/mmfv2
-INCLUDES += -I$(BASEDIR)/../../../component/common/application/airsync/1.0.4
 
 INCLUDES += -I$(BASEDIR)/../../../component/soc/realtek/8710c/cmsis/rtl8710c/include
 INCLUDES += -I$(BASEDIR)/../../../component/soc/realtek/8710c/cmsis/rtl8710c/lib/include
@@ -148,18 +97,6 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
-#INCLUDES += -I$(CHIPDIR)/config/ambd
-#INCLUDES += -I$(CHIPDIR)/src/include/platform/AMBD
-#INCLUDES += -I$(CHIPDIR)/src/include
-#INCLUDES += -I$(CHIPDIR)/src/lib
-#INCLUDES += -I$(CHIPDIR)/src
-#INCLUDES += -I$(CHIPDIR)/src/system
-#INCLUDES += -I$(CHIPDIR)/src/app
-#INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include
-#INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include/mbedtls
-#INCLUDES += -I$(CHIPDIR)/third_party/nlassert/repo/include
-#INCLUDES += -I$(CHIPDIR)/third_party/nlio/repo/include
-#INCLUDES += -I$(CHIPDIR)/third_party/nlunit-test/repo/src
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -308,19 +245,11 @@ CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_ZEPHYR_SOCKET_EXTENSIONS=0
 CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_LWIP=1
 CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_SOCKETS=0
 CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_NETWORK_FRAMEWORK=0
+CFLAGS += -DCHIP_SYSTEM_CONFIG_POSIX_LOCKING=0
+CFLAGS += -DINET_CONFIG_ENABLE_IPV4=1
 
 CFLAGS += -DUSE_ZAP_CONFIG
 CFLAGS += -DCHIP_HAVE_CONFIG_H
-CFLAGS += -DLWIP_IPV6_SCOPES=0
-
-CFLAGS += -DLWIP_IPV6_ND=0
-CFLAGS += -DLWIP_IPV6_SCOPES=0
-CFLAGS += -DLWIP_PBUF_FROM_CUSTOM_POOLS=0
-
-CFLAGS += -DCHIP_DEVICE_LAYER_NONE=0
-CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_ZEPHYR_NET_IF=0
-CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_BSD_IFADDRS=0
-CFLAGS += -DCHIP_SYSTEM_CONFIG_USE_ZEPHYR_SOCKET_EXTENSIONS=0
 
 CPPFLAGS := $(CFLAGS)
 
