@@ -185,6 +185,7 @@ GENERATE_NINJA:
 	echo ambd_cxx = \"arm-none-eabi-c++\"  >> $(OUTPUT_DIR)/args.gn
 	echo ambd_cpu = \"ambd\"               >> $(OUTPUT_DIR)/args.gn
 	cd $(CHIPDIR) && PW_ENVSETUP_QUIET=1 . scripts/activate.sh
+	sed -i 's/chip_build_tests\ =\ true/chip_build_tests\ =\ false/g' $(CHIPDIR)/config/ambd/args.gni
 	mkdir -p $(CHIPDIR)/config/ambd/components/chip
 	cd $(CHIPDIR)/config/ambd/components/chip && gn gen --check --fail-on-unused-args $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip
 	cd $(CHIPDIR)/config/ambd/components/chip ; ninja -C $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip

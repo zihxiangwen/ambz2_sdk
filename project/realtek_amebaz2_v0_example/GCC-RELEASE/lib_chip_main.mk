@@ -175,10 +175,11 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioni
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning-ember.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/descriptor/descriptor.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/operational-credentials-server/operational-credentials-server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/ota-server/ota-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ota-provider/ota-provider.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/test-cluster-server/test-cluster-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/pump-configuration-and-control-server/pump-configuration-and-control-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
@@ -194,6 +195,8 @@ SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/IMCluste
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/DeviceCallbacks.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/CHIPDeviceManager.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/Globals.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/LEDWidget.cpp
 
 
 #lib_version
@@ -311,7 +314,7 @@ $(SRC_OO): %_$(TARGET).oo : %.cpp | prerequirement
 	$(CC) $(CPPFLAGS) $(INCLUDES) -c $< -MM -MT $@ -MF $(OBJ_DIR)/$(notdir $(patsubst %.oo,%.d,$@))
 	cp $@ $(OBJ_DIR)/$(notdir $@)
 	mv $(notdir $*.ii) $(INFO_DIR)
-#	mv $(notdir $*.s) $(INFO_DIR)
+	mv $(notdir $*.s) $(INFO_DIR)
 	chmod 777 $(OBJ_DIR)/$(notdir $@)
 
 $(SRC_O): %_$(TARGET).o : %.c | prerequirement
