@@ -537,17 +537,11 @@ typedef unsigned char	BOOLEAN,*PBOOLEAN;
 #define	__restrict			/* Ignore */
 #endif
 
-
-#if CHIP_PROJECT
-//#include <sys/time.h>
+#if defined(CHIP_PROJECT) && CHIP_PROJECT
 #include <assert.h>
 
 extern size_t strnlen(const char *s, size_t count);
 extern void *pvPortMalloc( size_t xWantedSize );
-//extern char * _strtok_r(register char *s , register const char *delim , char **lasts);
-//extern int _nanosleep( const struct timespec * rqtp, struct timespec * rmtp );
-//extern int _vTaskDelay( const TickType_t xTicksToDelay );
-//extern time_t _time( time_t * tloc );
 
 //def
 #ifndef false
@@ -558,43 +552,13 @@ extern void *pvPortMalloc( size_t xWantedSize );
     #define true    1
 #endif
 
-#ifndef strtok_r
-    #define strtok_r(s, delim, lasts)	  _strtok_r (s, delim, lasts)
-#endif
-
-#ifndef usleep
-    #define usleep(x)    _vTaskDelay(x)
-#endif
-
-#ifndef nanosleep
-    #define nanosleep    _nanosleep
-#endif
-
 #ifndef in_addr_t
     typedef __uint32_t in_addr_t;
 #endif
 
-#define time _time
-
 //undef
 #ifdef bool
     #undef bool
-#endif
-
-#ifdef strtok
-    #undef strtok
-#endif
-
-#ifdef strtol
-    #undef strtol
-#endif
-
-#ifdef rand
-    #undef rand
-#endif
-
-#ifdef srand
-    #undef srand
 #endif
 
 #ifdef s8
@@ -613,10 +577,6 @@ extern void *pvPortMalloc( size_t xWantedSize );
     #undef IN
 #endif
 
-#ifdef vsnprintf
-    #undef vsnprintf
-#endif
-
-#endif //CHIP_PROJECT
+#endif // defined(CHIP_PROJECT) && CHIP_PROJECT
 
 #endif// __BASIC_TYPES_H__
