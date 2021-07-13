@@ -39,6 +39,11 @@ lib_all: toolchain
 	@$(MAKE) -f lib_chip.mk all
 	@$(MAKE) -f lib_chip_main.mk all
 
+.PHONY: light
+light: toolchain
+	@$(MAKE) -f lib_chip_light_core.mk all
+	@$(MAKE) -f lib_chip_light_main.mk all
+
 .PHONY: is
 is: toolchain
 	@$(MAKE) -f application.is.mk
@@ -51,6 +56,8 @@ mp: toolchain
 clean:
 	@$(MAKE) -f lib_chip.mk clean
 	@$(MAKE) -f lib_chip_main.mk clean
+	@$(MAKE) -f lib_chip_light_core.mk clean
+	@$(MAKE) -f lib_chip_light_main.mk clean
 	@$(MAKE) -f application.is.mk clean
 
 debug: toolchain
