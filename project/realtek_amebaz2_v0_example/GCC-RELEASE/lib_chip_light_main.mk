@@ -151,6 +151,7 @@ SRC_CPP += $(CHIPDIR)/src/app/util/message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-cluster-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
+SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/clusters/basic/basic.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/bindings/bindings.cpp
@@ -161,6 +162,9 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/operational-credentials-server/operationa
 SRC_CPP += $(CHIPDIR)/src/app/clusters/level-control/level-control.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning-ember.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp

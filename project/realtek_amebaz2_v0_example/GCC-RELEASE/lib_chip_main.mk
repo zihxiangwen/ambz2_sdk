@@ -126,6 +126,8 @@ SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
+SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
+
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
@@ -151,6 +153,7 @@ SRC_CPP += $(CHIPDIR)/src/app/util/message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-cluster-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
+SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/clusters/on-off-server/on-off-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/level-control/level-control.cpp
@@ -180,6 +183,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/test-cluster-server/test-cluster-server.c
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/pump-configuration-and-control-server/pump-configuration-and-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp

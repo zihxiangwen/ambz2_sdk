@@ -62,7 +62,7 @@ If you already have a checkout, run the following command to sync submodules rec
 ## Flash Image
     ambz2_sdk/project/realtek_amebaz2_v0_example/GCC-RELEASE/application_is/Debug/bin/flash_is.bin
 
-## Run CHIP task on AmebaZ2 (all-cluster-app example)
+## Run CHIP task on AmebaZ2 (all-cluster-app/lighting-app example)
     enter command in console
 
     ATW0=testAP
