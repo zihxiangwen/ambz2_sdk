@@ -165,6 +165,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioni
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp

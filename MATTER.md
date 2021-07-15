@@ -28,17 +28,17 @@ If you already have a checkout, run the following command to sync submodules rec
 ## Make CHIP library by gn and Make lib_main.a
 ### all-cluster-app
 
-    source ToolPath.sh
-
     cd ambz2_sdk/project/realtek_amebaz2_v0_example/GCC-RELEASE
 
+    source ToolPath.sh
+	
     make lib_all
 
 ### lighting-app
 
-    source ToolPath.sh
-
     cd ambz2_sdk/project/realtek_amebaz2_v0_example/GCC-RELEASE
+
+    source ToolPath.sh
 
     make light
 
