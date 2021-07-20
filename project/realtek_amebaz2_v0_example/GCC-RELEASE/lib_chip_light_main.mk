@@ -166,6 +166,10 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/identify/identify.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/scenes/scenes.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ota-provider/ota-provider.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
