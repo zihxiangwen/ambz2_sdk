@@ -77,7 +77,9 @@ If you already have a checkout, run the following command to sync submodules rec
 ## Test with [chip-tool](https://github.com/hank820/connectedhomeip/tree/master/examples/chip-tool)
 Use standalone chip-tool app(linux) to communicate with the device.
 
-`./chip-tool pairing bypass 192.168.xxx.xxx 11097  (Ameba IP)`
+`Disable "config_pair_with_random_id = false" in examples/chip-tool/BUILD.gn if test bypass mode`
+
+`./chip-tool pairing bypass xxx.xxx.xxx.xxx 5540  (Ameba IP)`
 
 <b>onoff cluster</b>
 

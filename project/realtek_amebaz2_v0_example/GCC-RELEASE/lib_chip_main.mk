@@ -184,6 +184,9 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-
 SRC_CPP += $(CHIPDIR)/src/app/clusters/pump-configuration-and-control-server/pump-configuration-and-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
