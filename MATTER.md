@@ -1,5 +1,9 @@
 # Matter (previously CHIP) on AmebaZ2
 
+## How to support Matter on Ameba SDK
+
+https://github.com/hank820/ambz2_sdk/blob/with_Matter/MATTER_PORTING.md
+
 ## Get Ameba SDK & Matter SDK
 
     Test on Ubuntu 20.04
