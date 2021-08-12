@@ -576,6 +576,7 @@ SRC_C += ../../../component/common/example/websocket_client/example_wsclient.c
 SRC_C += ../../../component/common/example/xml/example_xml.c
 SRC_C += ../../../component/common/example/fatfs/example_fatfs.c
 SRC_C += ../../../component/common/example/tickless_wifi_roaming/example_tickless_wifi_roaming.c
+SRC_C += ../../../component/common/example/matter_task/example_matter.c
 
 #user
 SRC_C += ../src/main.c

@@ -2028,7 +2028,7 @@ void fATSM(void *arg)
 #endif
 
 extern void ChipTest(void);
-
+extern int32_t deinitPref(void);
 void fATchipapp(void *arg)
 {
 	(void) arg;
@@ -2041,7 +2041,7 @@ void fATSt(void *arg)
 {
 	/* To avoid gcc warnings */
 	( void ) arg;
-
+	deinitPref();
 	AT_PRINTK("[ATS#]: _AT_SYSTEM_TEST_");
 }
 
