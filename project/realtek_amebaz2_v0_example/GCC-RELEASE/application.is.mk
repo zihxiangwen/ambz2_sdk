@@ -64,6 +64,7 @@ INCLUDES += -I../inc
 
 INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include
 INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include/mbedtls
+INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/library
 INCLUDES += -I$(CHIPDIR)/config/ambd
 
 INCLUDES += -I../../../component/common/api
@@ -385,6 +386,8 @@ SRC_C += ../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freerto
 SRC_C += ../../../component/common/network/mDNS/mDNSPlatform.c
 
 #network - ssl - mbedtls
+#merge 2.4.0/net_sockets.c because MBEDTLS_NET_C
+SRC_C += ../../../component/common/network/ssl/mbedtls-matter/net_sockets.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/aes.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/aesni.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/arc4.c
@@ -424,7 +427,7 @@ SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md5.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md.c
 #SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/md_wrap.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/memory_buffer_alloc.c
-SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/net_sockets.c
+#SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/net_sockets.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/nist_kw.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/oid.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/padlock.c
@@ -449,6 +452,7 @@ SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_cache.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_ciphersuites.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_cli.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_cookie.c
+SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_msg.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_srv.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_ticket.c
 SRC_C += $(CHIPDIR)/third_party/mbedtls/repo/library/ssl_tls.c
