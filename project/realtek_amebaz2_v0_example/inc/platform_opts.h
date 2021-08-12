@@ -183,6 +183,9 @@
 /* For HTTP CLIENT example */
 #define CONFIG_EXAMPLE_HTTP_CLIENT  0
 
+/* For MDNS example */
+#define CONFIG_EXAMPLE_MDNS		0
+
 /* For MQTT example */
 #define CONFIG_EXAMPLE_MQTT				0
 
