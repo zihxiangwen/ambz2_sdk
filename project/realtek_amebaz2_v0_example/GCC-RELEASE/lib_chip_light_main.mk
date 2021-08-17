@@ -133,6 +133,8 @@ SRC_CPP += $(CHIPDIR)/src/app/server/RendezvousServer.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/StorablePeerConnection.cpp
 
+SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
+
 SRC_CPP += $(CHIPDIR)/src/app/util/af-event.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/af-main-common.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/attribute-list-byte-span.cpp
@@ -168,6 +170,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ether
 SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 
 #Specific clusters for lighting product
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp

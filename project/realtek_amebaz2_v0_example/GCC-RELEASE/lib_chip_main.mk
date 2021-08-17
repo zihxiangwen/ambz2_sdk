@@ -187,6 +187,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ether
 SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
@@ -196,7 +197,6 @@ SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/attribut
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/callback-stub.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/CHIPClientCallbacks.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/CHIPClusters.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/encoder.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/IMClusterCommandHandler.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
