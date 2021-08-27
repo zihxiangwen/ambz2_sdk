@@ -46,7 +46,7 @@
 /******************************************************************************/
 
 /**
-* For common flash usage  
+* For common flash usage
 */
 #define FLASH_BAKEUP_SECTOR		(0x3000)
 #define FAST_RECONNECT_DATA		(0x200000 - 0x1000)  // 0x1FF000
@@ -98,7 +98,7 @@
 #define CONFIG_WIFI_IND_USE_THREAD	1
 #endif
 #if (CONFIG_ENABLE_P2P && ((CONFIG_ENABLE_WPS_AP == 0) || (CONFIG_ENABLE_WPS == 0)))
-#error "If CONFIG_ENABLE_P2P, need to define CONFIG_ENABLE_WPS_AP 1" 
+#error "If CONFIG_ENABLE_P2P, need to define CONFIG_ENABLE_WPS_AP 1"
 #endif
 
 /* For SSL/TLS */
@@ -116,7 +116,7 @@
 #define CONFIG_INCLUDE_SIMPLE_CONFIG		1
 #define CONFIG_INCLUDE_DPP_CONFIG		0
 /*For fast reconnection*/
-#define CONFIG_EXAMPLE_WLAN_FAST_CONNECT	1
+#define CONFIG_EXAMPLE_WLAN_FAST_CONNECT	0
 #if CONFIG_EXAMPLE_WLAN_FAST_CONNECT
 #define CONFIG_FAST_DHCP 1
 #else
@@ -128,7 +128,7 @@
 
 #define CONFIG_GAGENT			0
 /*Disable CONFIG_EXAMPLE_WLAN_FAST_CONNECT when CONFIG_GAGENT is enabled,because
-	reconnect to previous AP is not suitable when re-configuration. 
+	reconnect to previous AP is not suitable when re-configuration.
 */
 #if CONFIG_GAGENT
 #define CONFIG_EXAMPLE_WLAN_FAST_CONNECT 0
@@ -170,7 +170,7 @@
 /* for CoAP example*/
 #define CONFIG_EXAMPLE_COAP              0
 
-/* for lib CoAP example*/ 
+/* for lib CoAP example*/
 #define CONFIG_EXAMPLE_COAP_SERVER       0
 #define CONFIG_EXAMPLE_COAP_CLIENT       0
 
@@ -179,7 +179,7 @@
 
 /* For WIFI MAC MONITOR example */
 #define CONFIG_EXAMPLE_WIFI_MAC_MONITOR  0
-   
+
 /* For HTTP CLIENT example */
 #define CONFIG_EXAMPLE_HTTP_CLIENT  0
 
@@ -304,7 +304,7 @@
 /* For wifi scenarios example (Wi-Fi, WPS enrollee, P2P GO) */
 // also need to enable WPS and P2P
 #define CONFIG_EXAMPLE_WLAN_SCENARIO	0
-	 
+
 /* For broadcast example */
 #define CONFIG_EXAMPLE_BCAST			0
 
@@ -338,7 +338,7 @@
 #if CONFIG_ENABLE_WPS
 #define WPS_CONNECT_RETRY_COUNT		4
 #define WPS_CONNECT_RETRY_INTERVAL	5000 // in ms
-#endif 
+#endif
 
 #define AUTO_RECONNECT_COUNT	8
 #define AUTO_RECONNECT_INTERVAL	5 // in sec
@@ -350,7 +350,7 @@
 #define CONFIG_EXAMPLE_AMAZON_FREERTOS 0
 
 #define CONFIG_EXAMPLE_AMAZON_AFQP_TESTS 0
-   
+
 #if (defined(CONFIG_EXAMPLE_AMAZON_FREERTOS) && CONFIG_EXAMPLE_AMAZON_FREERTOS) || \
     (defined(CONFIG_EXAMPLE_AMAZON_AFQP_TESTS) && CONFIG_EXAMPLE_AMAZON_AFQP_TESTS)
 #undef CONFIG_INCLUDE_SIMPLE_CONFIG
