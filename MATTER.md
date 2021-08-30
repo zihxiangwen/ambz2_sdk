@@ -2,7 +2,7 @@
 
 ## How to support Matter on Ameba SDK
 
-https://github.com/hank820/ambz2_sdk/blob/with_Matter/MATTER_PORTING.md
+https://github.com/hank820/ambz2_sdk/blob/matter/MATTER_PORTING.md
 
 ## Get Ameba SDK & Matter SDK
 
@@ -10,7 +10,7 @@ https://github.com/hank820/ambz2_sdk/blob/with_Matter/MATTER_PORTING.md
 
 To check out this repository:
 
-    git clone -b with_Matter --recurse-submodules https://github.com/hank820/ambz2_sdk.git
+    git clone -b matter --recurse-submodules https://github.com/hank820/ambz2_sdk.git
 
 If you already have a checkout, run the following command to sync submodules recursively:
 
@@ -46,13 +46,13 @@ If you already have a checkout, run the following command to sync submodules rec
 
     make light
 
-### CHIP core (generate by GN/ninja in connectedhomeip. Config by [lib_chip.mk](https://github.com/hank820/ambz2_sdk/blob/with_Matter/project/realtek_amebaz2_v0_example/GCC-RELEASE/lib_chip.mk))
+### CHIP core (generate by GN/ninja in connectedhomeip. Config by [lib_chip.mk](https://github.com/hank820/ambz2_sdk/blob/matter/project/realtek_amebaz2_v0_example/GCC-RELEASE/lib_chip.mk))
 
     output : ambz2_sdk/component/soc/realtek/8710c/misc/bsp/lib/common/GCC
 	
     > libCHIP.a, ibCoreTests.a, ibChipCryptoTests.a, ibRawTransportTests.a...
 
-### CHIP application (generate by [lib_chip_main.mk](https://github.com/hank820/ambz2_sdk/blob/with_Matter/project/realtek_amebaz2_v0_example/GCC-RELEASE/lib_chip_main.mk)))
+### CHIP application (generate by [lib_chip_main.mk](https://github.com/hank820/ambz2_sdk/blob/matter/project/realtek_amebaz2_v0_example/GCC-RELEASE/lib_chip_main.mk)))
 
     output : ambz2_sdk/component/soc/realtek/8710c/misc/bsp/lib/common/GCC
 
