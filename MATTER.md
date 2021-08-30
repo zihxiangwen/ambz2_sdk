@@ -118,11 +118,30 @@ To launch Python Controller, activate the python environment first.
 
 * In "connectedhomeip/src/platform/AMBD/CHIPDevicePlatformConfig.h"
 	* Set `#define CONFIG_USE_CLUSTERS_FOR_IP_COMMISSIONING	1`
+	* Set `#define CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE 0`
 
 * Build and Flash
-* Connect to AP using `ATW` commands
 * Enter the ATCMD `ATS$`
+* Connect to AP using `ATW` commands
 * Run python controller IP commissioning command `chip-device-ctrl > connect -ip <IP> 20202021 135246`
+* Resolve mDNS `chip-device-ctrl >resolve 0 135246`
+
+#### BLE Commissioning
+* In "connectedhomeip/config/ambd/args.gni"
+	* Set `chip_ip_commissioning = false`
+	* Set `chip_use_clusters_for_ip_commissioning = false`
+	* Set `chip_config_network_layer_ble = true`
+
+* In "connectedhomeip/src/platform/AMBD/CHIPDevicePlatformConfig.h"
+	* Set `#define CONFIG_USE_CLUSTERS_FOR_IP_COMMISSIONING	0`
+	* Set `#define CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE 1`
+
+* Build and Flash
+* Enter the ATCMD `ATS$`
+* Run python controller BLE commissioning command `chip-device-ctrl > connect -ble 3840 20202021 135246`
+* Provide network credentials `chip-device-ctrl > zcl NetworkCommissioning AddWiFiNetwork 135246 0 0 ssid=str:TESTSSID credentials=str:TESTPASSWD breadcrumb=0 timeoutMs=1000`
+* Connect to AP `chip-device-ctrl > zcl NetworkCommissioning EnableNetwork 135246 0 0 networkID=str:TESTSSID breadcrumb=0 timeoutMs=1000`
+* Close the BLE connection `chip-device-ctrl > close-ble`
 * Resolve mDNS `chip-device-ctrl >resolve 0 135246`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff On 135246 1 1`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`

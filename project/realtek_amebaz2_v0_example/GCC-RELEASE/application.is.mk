@@ -9,16 +9,16 @@ AMEBAZ2_BSPDIR = ../../../component/soc/realtek/8710c/misc/bsp
 AMEBAZ2_BOOTLOADERDIR = $(AMEBAZ2_BSPDIR)/image
 AMEBAZ2_ROMSYMDIR = $(AMEBAZ2_BSPDIR)/ROM
 
-DUMP_START_ADDRESS = 0x98000000
-DUMP_END_ADDRESS = 0x98200000
-
 BASEDIR := $(shell pwd)
 CHIPDIR = $(BASEDIR)/../../../third_party/connectedhomeip
 
+DUMP_START_ADDRESS = 0x98000000
+DUMP_END_ADDRESS = 0x98200000
+
 OS := $(shell uname)
 
-#CROSS_COMPILE = $(ARM_GCC_TOOLCHAIN)/arm-none-eabi-
-CROSS_COMPILE = arm-none-eabi-
+CROSS_COMPILE = $(ARM_GCC_TOOLCHAIN)/arm-none-eabi-
+#CROSS_COMPILE = arm-none-eabi-
 
 # Compilation tools
 AR = $(CROSS_COMPILE)ar
@@ -117,6 +117,7 @@ INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/os
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/vendor_cmd
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/bt_config
+INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/ble_central
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/ble_peripheral
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/ble_scatternet
@@ -146,6 +147,7 @@ INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_mu
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_multiple_profile/provisioner_multiple_profile
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_test
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/src/mcu/module/data_uart_cmd
+INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/src/app/hrp/gap
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/board/common/inc
 INCLUDES += -I../../../component/common/bluetooth/realtek/sdk/example/bt_airsync_config
 INCLUDES += -I../../../component/common/media/rtp_codec
@@ -240,6 +242,13 @@ SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_config/bt_co
 SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_config/bt_config_peripheral_app.c
 SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_config/bt_config_service.c
 SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_config/bt_config_wifi.c
+
+#bluetooth - example - bt_matter_adapter
+SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter/bt_matter_adapter_app_main.c
+SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter/bt_matter_adapter_app_task.c
+SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter/bt_matter_adapter_peripheral_app.c
+SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter/bt_matter_adapter_service.c
+SRC_C += ../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter/bt_matter_adapter_wifi.c
 
 #bluetooth - example
 SRC_C += ../../../component/common/bluetooth/realtek/sdk/bt_example_entry.c

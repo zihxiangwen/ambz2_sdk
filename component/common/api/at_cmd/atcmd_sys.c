@@ -2029,12 +2029,18 @@ void fATSM(void *arg)
 
 extern void ChipTest(void);
 extern int32_t deinitPref(void);
+void chipapp(void *param)
+{
+	ChipTest();
+}
+
 void fATchipapp(void *arg)
 {
 	(void) arg;
-
 	printf("Chip Test:\r\n");
-	ChipTest();
+	xTaskCreate(chipapp, "chipapp",
+                                4096 / sizeof(StackType_t), NULL,
+                                1, NULL);
 }
 
 void fATSt(void *arg)

@@ -10,6 +10,7 @@
 #include "errno.h"
 #include <sntp/sntp.h>
 #include "dct.h"
+#include <wifi_conf.h>
 
 #define MICROSECONDS_PER_SECOND    ( 1000000LL )                                   /**< Microseconds per second. */
 #define NANOSECONDS_PER_SECOND     ( 1000000000LL )                                /**< Nanoseconds per second. */
@@ -387,6 +388,24 @@ int32_t getPref_bin_new(char *domain, char *key, uint8_t * buf, size_t bufSize, 
 
 exit:
     return (DCT_SUCCESS == ret ? 1 : 0);
+}
+
+rtw_wifi_setting_t chip_wifi_setting = {0};
+int CHIP_SetWiFiConfig(rtw_wifi_setting_t *config)
+{
+	//printf("%s %d %s %sToDo\r\n", __func__,__LINE__, config->ssid, config->password);
+	if(config)
+        memcpy(&chip_wifi_setting, config, sizeof(chip_wifi_setting));
+	return 0;
+}
+
+int CHIP_GetWiFiConfig(rtw_wifi_setting_t *config)
+{
+	//printf("%s %d %s %sToDo\r\n", __func__,__LINE__, chip_wifi_setting.ssid, chip_wifi_setting.password);
+	if(config)
+        memcpy(config, &chip_wifi_setting, sizeof(chip_wifi_setting));
+        //printf("%s %d %s %sToDo\r\n", __func__,__LINE__, config->ssid, config->password);
+	return 0;
 }
 
 #ifdef __cplusplus

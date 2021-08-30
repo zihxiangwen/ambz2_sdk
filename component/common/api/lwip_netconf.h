@@ -97,6 +97,7 @@ uint8_t* LwIP_GetIPv6_global(struct netif *pnetif);
 #endif
 #endif
 uint32_t LWIP_Get_Dynamic_Sleep_Interval(void);
+extern struct netif xnetif[];
 #ifdef __cplusplus
 }
 #endif
