@@ -68,7 +68,7 @@ a lot of data that needs to be copied, this should be set high. */
 #define MEMP_NUM_PBUF           100
 /* MEMP_NUM_UDP_PCB: the number of UDP protocol control blocks. One
    per active UDP "connection". */
-#define MEMP_NUM_UDP_PCB        6
+#define MEMP_NUM_UDP_PCB        10
 /* MEMP_NUM_TCP_PCB: the number of simulatenously active TCP
    connections. */
 #define MEMP_NUM_TCP_PCB        10
@@ -392,7 +392,7 @@ Certain platform allows computing and verifying the IP, UDP, TCP and ICMP checks
 
 /*CONFIG_LIBCOAP_ON is defined to 1 in the lib_coap project options preprocessor defined symbol
 CONFIG_EXAMPLE_COAP_SERVER and CONFIG_EXAMPLE_COAP_CLIENT is defined in platform_opts.h*/
-#if CONFIG_EXAMPLE_COAP_SERVER || CONFIG_EXAMPLE_COAP_CLIENT || (defined(CONFIG_LIBCOAP_ON) && (CONFIG_LIBCOAP_ON))   
+#if CONFIG_EXAMPLE_COAP_SERVER || CONFIG_EXAMPLE_COAP_CLIENT || (defined(CONFIG_LIBCOAP_ON) && (CONFIG_LIBCOAP_ON))
 #if defined LWIP_TIMEVAL_PRIVATE
 #undef LWIP_TIMEVAL_PRIVATE
 #define LWIP_TIMEVAL_PRIVATE            1
@@ -400,7 +400,7 @@ CONFIG_EXAMPLE_COAP_SERVER and CONFIG_EXAMPLE_COAP_CLIENT is defined in platform
 #undef SO_REUSE
 #define SO_REUSE                        1
 #undef MEMP_NUM_NETCONN
-#define MEMP_NUM_NETCONN                20   
+#define MEMP_NUM_NETCONN                20
 #define MEMP_USE_CUSTOM_POOLS           1
 #undef LWIP_IPV6
 #define LWIP_IPV6                       1
@@ -410,13 +410,13 @@ CONFIG_EXAMPLE_COAP_SERVER and CONFIG_EXAMPLE_COAP_CLIENT is defined in platform
 #undef MEMP_NUM_SYS_TIMEOUT
 #define MEMP_NUM_SYS_TIMEOUT            20
 #ifndef xchar
-#define xchar(i)                ((i) < 10 ? '0' + (i) : 'A' + (i) - 10)               
+#define xchar(i)                ((i) < 10 ? '0' + (i) : 'A' + (i) - 10)
 #endif
 #endif
-#endif 
-      
-#if defined(ENABLE_AMAZON_COMMON) 
-#define LWIP_COMPAT_MUTEX_ALLOWED  
+#endif
+
+#if defined(ENABLE_AMAZON_COMMON)
+#define LWIP_COMPAT_MUTEX_ALLOWED
 #define ERRNO   1
 #define LWIP_SO_SNDTIMEO                1
 #define SYS_LIGHTWEIGHT_PROT    1
