@@ -149,6 +149,11 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
+INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app
+INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/main/include
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -156,11 +161,8 @@ INCLUDES += -I$(CHIPDIR)/third_party/nlassert/repo/include
 INCLUDES += -I$(CHIPDIR)/src/app
 INCLUDES += -I$(CHIPDIR)/src/app/util
 INCLUDES += -I$(CHIPDIR)/src/app/server
+INCLUDES += -I$(CHIPDIR)/src/controller/data_model
 INCLUDES += -I$(CHIPDIR)/third_party/nlio/repo/include
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/main/include
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/third_party/nlunit-test/repo/src
 
 # Source file list
@@ -245,11 +247,11 @@ SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/attribute-size.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/callback-stub.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/CHIPClientCallbacks.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/CHIPClusters.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/IMClusterCommandHandler.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/attribute-size.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClientCallbacks.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/callback-stub.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/IMClusterCommandHandler.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClusters.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/DeviceCallbacks.cpp
