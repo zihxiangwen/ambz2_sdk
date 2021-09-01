@@ -91,7 +91,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/a
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/hci
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/os
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/amebaz2/src/vendor_cmd
-INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_config
+INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_matter_adapter
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/ble_central
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/ble_peripheral
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/ble_scatternet
@@ -121,6 +121,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_multiple_profile/provisioner_multiple_profile
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_mesh_test
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/src/mcu/module/data_uart_cmd
+INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/src/app/hrp/gap
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/board/common/inc
 INCLUDES += -I$(BASEDIR)/../../../component/common/bluetooth/realtek/sdk/example/bt_airsync_config
 INCLUDES += -I$(BASEDIR)/../../../component/common/media/rtp_codec
@@ -160,6 +161,7 @@ INCLUDES += -I$(CHIPDIR)/third_party/nlassert/repo/include
 INCLUDES += -I$(CHIPDIR)/src/app
 INCLUDES += -I$(CHIPDIR)/src/app/util
 INCLUDES += -I$(CHIPDIR)/src/app/server
+INCLUDES += -I$(CHIPDIR)/src/controller/data_model
 INCLUDES += -I$(CHIPDIR)/third_party/nlio/repo/include
 INCLUDES += -I$(CHIPDIR)/third_party/nlunit-test/repo/src
 
@@ -178,14 +180,14 @@ SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
+SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
+
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/RendezvousServer.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/StorablePeerConnection.cpp
-
-SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/util/af-event.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/af-main-common.cpp
@@ -240,6 +242,7 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/callback-stub.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/IMClusterCommandHandler.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/chipinterface.cpp
+SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/DeviceCallbacks.cpp
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/CHIPDeviceManager.cpp
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/Globals.cpp
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/LEDWidget.cpp
