@@ -124,7 +124,8 @@ To launch Python Controller, activate the python environment first.
 * Enter the ATCMD `ATS$`
 * Connect to AP using `ATW` commands
 * Run python controller IP commissioning command `chip-device-ctrl > connect -ip <IP> 20202021 135246`
-* Resolve mDNS `chip-device-ctrl >resolve 0 135246`
+* Resolve DNS-SD name and update address of the node in the device controller. Get fabric ID using get-fabricid and use the decimal value of compressed fabric id. `chip-device-ctrl > get-fabricid`
+* Resolve mDNS `chip-device-ctrl > resolve <Compressed Fabric ID> 135246`
 
 #### BLE Commissioning
 * In "connectedhomeip/config/ambd/args.gni"
@@ -142,6 +143,8 @@ To launch Python Controller, activate the python environment first.
 * Provide network credentials `chip-device-ctrl > zcl NetworkCommissioning AddWiFiNetwork 135246 0 0 ssid=str:TESTSSID credentials=str:TESTPASSWD breadcrumb=0 timeoutMs=1000`
 * Connect to AP `chip-device-ctrl > zcl NetworkCommissioning EnableNetwork 135246 0 0 networkID=str:TESTSSID breadcrumb=0 timeoutMs=1000`
 * Close the BLE connection `chip-device-ctrl > close-ble`
-* Resolve mDNS `chip-device-ctrl >resolve 0 135246`
+* Resolve DNS-SD name and update address of the node in the device controller. Get fabric ID using get-fabricid and use the decimal value of compressed fabric id. `chip-device-ctrl > get-fabricid`
+
+* Resolve mDNS `chip-device-ctrl >resolve <Compressed Fabric ID> 135246`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff On 135246 1 1`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`

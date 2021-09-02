@@ -149,6 +149,12 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
+INCLUDES += -I$(CHIPDIR)/zzz_generated/lighting-app
+INCLUDES += -I$(CHIPDIR)/zzz_generated/lighting-app/zap-generated
+INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
+INCLUDES += -I$(CHIPDIR)/examples/lighting-app/lighting-common
+INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ambd/main/include
+INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ambd/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -157,10 +163,6 @@ INCLUDES += -I$(CHIPDIR)/src/app
 INCLUDES += -I$(CHIPDIR)/src/app/util
 INCLUDES += -I$(CHIPDIR)/src/app/server
 INCLUDES += -I$(CHIPDIR)/third_party/nlio/repo/include
-INCLUDES += -I$(CHIPDIR)/examples/lighting-app/lighting-common
-INCLUDES += -I$(CHIPDIR)/examples/lighting-app/lighting-common/gen
-INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ambd/main/include
-INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ambd/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/third_party/nlunit-test/repo/src
 
 # Source file list
@@ -177,8 +179,6 @@ SRC_CPP += $(CHIPDIR)/src/app/encoder-common.cpp
 SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
-
-SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
@@ -235,9 +235,11 @@ SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/lighting-common/gen/attribute-size.cpp
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/lighting-common/gen/callback-stub.cpp
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/lighting-common/gen/IMClusterCommandHandler.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
+
+SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/attribute-size.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/callback-stub.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/IMClusterCommandHandler.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/DeviceCallbacks.cpp
