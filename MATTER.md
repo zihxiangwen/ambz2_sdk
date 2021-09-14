@@ -172,3 +172,50 @@ To launch Python Controller, activate the python environment first.
 * Resolve mDNS `chip-device-ctrl >resolve <Compressed Fabric ID> 135246`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff On 135246 1 1`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`
+
+## Test with [Android Chip-Tool](https://github.com/hank820/connectedhomeip/tree/master/src/android/CHIPTool)
+
+### Install Android Studio
+* Download [Android Studio](https://developer.android.com/studio?gclid=Cj0KCQjwkIGKBhCxARIsAINMioLrotRhWXySwLrveax_JTX-qt1H-zjyGBEZk2FtseA-SYmQYmpq9M4aApGsEALw_wcB&gclsrc=aw.ds#downloads) and [Android-NDK-r21e](https://github.com/android/ndk/wiki/Unsupported-Downloads) and extract the files.
+* Launch Android Studio: `cd android-studio/bin` and run `./studio.sh`
+* Go to **Customize** and **All settings**. Under **Appearance & Behaviour** >> **System Settings** >> **Android SDK**, Check **Android 5.0 (Lollipop)** and uncheck the rest. Default Android SDK location is at `~/Android/Sdk`.
+
+### Build Android Chip-Tool APK
+Run the following commands
+
+	cd connectedhomeip/
+	source script/bootstrap.sh
+	export ANDROID_HOME=~/Android/Sdk
+	export ANDROID_NDK_HOME={path to android-ndk-r21e}
+	
+Target CPU
+`TARGET_CPU` can have the following values, depending on your smartphone CPU
+architecture:
+
+| ABI         | TARGET_CPU |
+| ----------- | ---------- |
+| armeabi-v7a | arm        |
+| arm64-v8a   | arm64      |
+| x86         | x86        |
+| x86_64      | x64        |
+
+<hr>
+
+According to your smartphone's CPU architecture, run the command below
+
+	TARGET_CPU={TARGET_CPU} ./scripts/examples/android_app.sh
+	
+To build the apk file, use one of the two options below.
+1. Launch Android Studio again using `./studio.sh` and open project in `connectedhomeip/src/android/CHIPTool/`. Go to **File** >> **Sync Project with Gradle Files**, and then **Build** >> **Make Project**.
+2. Run the following commands from the top CHIP directory
+
+        cd src/android/CHIPTool
+        ./gradlew build
+
+The debug Android package `app-debug.apk` will be generated at
+`src/android/CHIPTool/app/build/outputs/apk/debug/`.
+
+### BLE Commissioning
+* Enter the ATCMD `ATS$` and go to the url generated, which will show a QR Code
+* Launch Android Chip-Tool app and press **Provision CHIP Device With Wi-Fi**
+* Scan the QR Code and enter the network credentials of the AP
