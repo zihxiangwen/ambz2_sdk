@@ -99,19 +99,19 @@ In order to send commands to a device, it must be commissioned with the client. 
 
 ### Bypass Rendezvous
 
-* Enter the ATCMD `ATS$`
+* Wait Matter Task start
 * Connect to AP using `ATW0, ATW1, ATWC` commands
 * Run CHIP-TOOL IP commissioning command `./chip-tool pairing bypass XXX.XXX.XXX.XXX 5540 (Ameba IP)`
 
 ### IP Commissioning
 
-* Enter the ATCMD `ATS$`
+* Wait Matter Task start
 * Connect to AP using `ATW0, ATW1, ATWC` commands
 * Run CHIP-TOOL IP commissioning command `./chip-tool pairing onnetwork 0 20202021 3840 XXX.XXX.XXX.XXX 5540 (Ameba IP)`
 
 ### BLE Commissioning
 
-* Enter the ATCMD `ATS$`
+* Wait Matter Task start
 * Run CHIP-TOOL IP commissioning command `./chip-tool pairing ble-wifi SSID PASSWORD 0 20202021 3840`
 
 ### Command for onoff cluster
@@ -141,7 +141,7 @@ To launch Python Controller, activate the python environment first.
 	chip-device-ctrl
 
 ### IP Commissioning
-* Enter the ATCMD `ATS$`
+* Wait Matter Task start
 * Connect to AP using `ATW0, ATW1, ATWC` commands
 * Run python controller IP commissioning command `chip-device-ctrl > connect -ip <IP> 20202021 135246`
 * Resolve mDNS `chip-device-ctrl > resolve 0 135246`
@@ -149,7 +149,7 @@ To launch Python Controller, activate the python environment first.
 * On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`
 
 ### BLE Commissioning
-* Enter the ATCMD `ATS$`
+* Wait Matter Task start
 * Run python controller BLE commissioning command `chip-device-ctrl > connect -ble 3840 20202021 135246`
 * Provide network credentials `chip-device-ctrl > zcl NetworkCommissioning AddWiFiNetwork 135246 0 0 ssid=str:TESTSSID credentials=str:TESTPASSWD breadcrumb=0 timeoutMs=1000`
 * Connect to AP `chip-device-ctrl > zcl NetworkCommissioning EnableNetwork 135246 0 0 networkID=str:TESTSSID breadcrumb=0 timeoutMs=1000`
