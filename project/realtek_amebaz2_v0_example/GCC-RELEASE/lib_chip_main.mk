@@ -205,7 +205,6 @@ SRC_CPP += $(CHIPDIR)/src/app/util/message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-cluster-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
-SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/clusters/on-off-server/on-off-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/level-control/level-control.cpp
@@ -235,11 +234,6 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/test-cluster-server/test-cluster-server.c
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/pump-configuration-and-control-server/pump-configuration-and-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp

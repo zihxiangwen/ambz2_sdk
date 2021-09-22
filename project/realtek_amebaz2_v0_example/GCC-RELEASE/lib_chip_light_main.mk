@@ -205,7 +205,6 @@ SRC_CPP += $(CHIPDIR)/src/app/util/message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-cluster-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
-SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/clusters/basic/basic.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/bindings/bindings.cpp
@@ -218,11 +217,6 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioni
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning-ember.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 
 #Specific clusters for lighting product
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
