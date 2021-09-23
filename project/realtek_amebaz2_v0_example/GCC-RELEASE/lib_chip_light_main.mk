@@ -149,6 +149,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
+INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/zzz_generated/lighting-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/lighting-app/zap-generated
 INCLUDES += -I$(CHIPDIR)/examples/lighting-app/lighting-common
@@ -180,14 +181,11 @@ SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
-SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
-
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/RendezvousServer.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/StorablePeerConnection.cpp
+SRC_CPP += $(CHIPDIR)/src/app/server/CommissioningWindowManager.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/util/af-event.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/af-main-common.cpp
@@ -240,6 +238,8 @@ SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/attribute-size.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/callback-stub.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/IMClusterCommandHandler.cpp
+
+SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/DeviceCallbacks.cpp
