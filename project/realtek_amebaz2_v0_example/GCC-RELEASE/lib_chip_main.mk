@@ -149,6 +149,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
+INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated
 INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
@@ -184,9 +185,8 @@ SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/RendezvousServer.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/StorablePeerConnection.cpp
+SRC_CPP += $(CHIPDIR)/src/app/server/CommissioningWindowManager.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/util/af-event.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/af-main-common.cpp
@@ -241,6 +241,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diag
 SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/window-covering-server/window-covering-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
@@ -253,6 +254,8 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClientCal
 SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/callback-stub.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/IMClusterCommandHandler.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClusters.cpp
+
+SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/DeviceCallbacks.cpp
