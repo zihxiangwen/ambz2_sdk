@@ -226,7 +226,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/admini
 
 #Specific clusters for lighting product
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/clusters/identify/identify.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/clusters/identify-server/identify-server.cpp
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/scenes/scenes.cpp
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/ota-provider/ota-provider.cpp

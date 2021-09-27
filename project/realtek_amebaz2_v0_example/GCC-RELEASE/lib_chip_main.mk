@@ -209,7 +209,7 @@ SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/clusters/on-off-server/on-off-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/level-control/level-control.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/identify/identify.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/identify-server/identify-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/barrier-control-server/barrier-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
