@@ -231,9 +231,11 @@ int bt_matter_adapter_app_init(void)
 #endif
 
 
+#if 0
 	wifi_disconnect();
 #if CONFIG_LWIP_LAYER
 	LwIP_ReleaseIP(WLAN0_IDX);
+#endif
 #endif
 
 	le_get_gap_param(GAP_PARAM_DEV_STATE , &new_state);
@@ -411,9 +413,12 @@ int bt_matter_adapter_init(void)
 	/* disable auto reconnect */
 	wifi_set_autoreconnect(0);
 #endif
+
+#if 0
 	wifi_disconnect();
 #if CONFIG_LWIP_LAYER
 	LwIP_ReleaseIP(WLAN0_IDX);
+#endif
 #endif
 
 	le_get_gap_param(GAP_PARAM_DEV_STATE , &new_state);
