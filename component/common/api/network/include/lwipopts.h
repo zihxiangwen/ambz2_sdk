@@ -12,6 +12,7 @@
 
 #include <platform/platform_stdlib.h>
 #include "platform_opts.h"
+#include "lwip/init.h"                  //for version control
 #define WIFI_LOGO_CERTIFICATION_CONFIG 0    //for ping 10k test buffer setting
 
 /**
@@ -387,7 +388,9 @@ Certain platform allows computing and verifying the IP, UDP, TCP and ICMP checks
 #define LWIP_IPV6_MLD                   1
 #define LWIP_IPV6_AUTOCONFIG            1
 #define LWIP_ICMP6                      1
+#if LWIP_VERSION_MAJOR >= 2 && LWIP_VERSION_MINOR >= 1
 #define LWIP_IPV6_DHCP6                 1
+#endif
 #endif
 
 /*CONFIG_LIBCOAP_ON is defined to 1 in the lib_coap project options preprocessor defined symbol
@@ -430,7 +433,5 @@ CONFIG_EXAMPLE_COAP_SERVER and CONFIG_EXAMPLE_COAP_CLIENT is defined in platform
 #if (defined(CONFIG_MIIO)&&(CONFIG_MIIO))
 #define LWIP_NETIF_HOSTNAME             1
 #endif
-
-#include "lwip/init.h"                  //for version control
 
 #endif /* LWIP_HDR_LWIPOPTS_H */
