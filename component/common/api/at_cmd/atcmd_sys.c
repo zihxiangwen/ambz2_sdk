@@ -2049,6 +2049,11 @@ void fATSt(void *arg)
 	( void ) arg;
 	deinitPref();
 	AT_PRINTK("[ATS#]: _AT_SYSTEM_TEST_");
+
+#if CONFIG_EXAMPLE_WLAN_FAST_CONNECT
+    Erase_Fastconnect_data();
+    printf("Erased Fast Connect data\r\n");
+#endif
 }
 
 #if defined(CONFIG_PLATFORM_8711B)
