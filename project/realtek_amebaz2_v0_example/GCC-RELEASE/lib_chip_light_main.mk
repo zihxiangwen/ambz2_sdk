@@ -223,6 +223,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diag
 SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
 
 #Specific clusters for lighting product
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
