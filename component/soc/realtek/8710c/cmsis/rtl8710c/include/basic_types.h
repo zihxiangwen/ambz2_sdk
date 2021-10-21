@@ -557,25 +557,25 @@ extern void *pvPortMalloc( size_t xWantedSize );
 #endif
 
 //undef
-#ifdef bool
-    #undef bool
-#endif
+//#ifdef bool
+//    #undef bool
+//#endif
 
-#ifdef s8
-    #undef s8
-#endif
+//#ifdef s8
+//    #undef s8
+//#endif
 
-#ifdef u32
-    #undef u32
-#endif
+//#ifdef u32
+//    #undef u32
+//#endif
 
-#ifdef u64
-    #undef u64
-#endif
+//#ifdef u64
+//    #undef u64
+//#endif
 
-#ifdef IN
-    #undef IN
-#endif
+//#ifdef IN
+//    #undef IN
+//#endif
 
 #endif // defined(CHIP_PROJECT) && CHIP_PROJECT
 
