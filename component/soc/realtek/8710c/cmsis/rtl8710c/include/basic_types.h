@@ -263,10 +263,10 @@ typedef void __attribute__((cmse_nonsecure_call)) nsfunc(void);
 
 #if SYSTEM_ENDIAN == PLATFORM_LITTLE_ENDIAN
 #ifndef rtk_le16_to_cpu
-#define rtk_cpu_to_le32(x)		((u32)(x))
-#define rtk_le32_to_cpu(x)		((u32)(x))
-#define rtk_cpu_to_le16(x)		((u16)(x))
-#define rtk_le16_to_cpu(x)		((u16)(x))
+#define rtk_cpu_to_le32(x)		((uint32_t)(x))
+#define rtk_le32_to_cpu(x)		((uint32_t)(x))
+#define rtk_cpu_to_le16(x)		((uint16_t)(x))
+#define rtk_le16_to_cpu(x)		((uint16_t)(x))
 #define rtk_cpu_to_be32(x)		SWAP32((x))
 #define rtk_be32_to_cpu(x)		SWAP32((x))
 #define rtk_cpu_to_be16(x)		WAP16((x))
@@ -556,6 +556,7 @@ extern void *pvPortMalloc( size_t xWantedSize );
     typedef __uint32_t in_addr_t;
 #endif
 
+#if 1
 //undef
 #ifdef bool
     #undef bool
@@ -576,6 +577,7 @@ extern void *pvPortMalloc( size_t xWantedSize );
 #ifdef IN
     #undef IN
 #endif
+#endif // if 0
 
 #endif // defined(CHIP_PROJECT) && CHIP_PROJECT
 
