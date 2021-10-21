@@ -288,7 +288,6 @@ CFLAGS += -D__ARM_ARCH_8M_MAIN__=1 -gdwarf-3 -fstack-usage -fdata-sections -ffun
 CFLAGS += -fdiagnostics-color=always -Wall -Wpointer-arith -Wno-write-strings 
 CFLAGS += -Wno-maybe-uninitialized --save-temps -c -MMD
 CFLAGS += -DCONFIG_PLATFORM_8710C -DCONFIG_BUILD_RAM=1
-CFLAGS += -DCONFIG_BUILD_LIB=1
 CFLAGS += -DV8M_STKOVF
 
 # CHIP options
