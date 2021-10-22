@@ -77,7 +77,7 @@ void sys_log_uart_off(void);
   * @param  gain: pointer to adc parameter gain
   * @retval none
   */
-void sys_adc_calibration(u8 write, u16 *offset, u16 *gain);
+void sys_adc_calibration(uint8_t write, uint16_t *offset, uint16_t *gain);
 
 /**
   * @brief  system software reset
@@ -95,7 +95,7 @@ void sys_reset(void);
   * @retval 1: power on
   *         0: power off
   */
-u8   sys_is_sdram_power_on(void);
+uint8_t   sys_is_sdram_power_on(void);
 
 /**
   * @brief sdram power off

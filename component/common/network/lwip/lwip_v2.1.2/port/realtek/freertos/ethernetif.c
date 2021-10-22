@@ -82,7 +82,7 @@
 #define IF2NAME1 '2'
 #endif
 
-extern s8 rltk_mii_send(struct eth_drv_sg *sg_list, int sg_len, int total_len);
+extern int8_t rltk_mii_send(struct eth_drv_sg *sg_list, int sg_len, int total_len);
 extern void rltk_mii_recv(struct eth_drv_sg *sg_list, int sg_len);
 
 static void arp_timer(void *arg);
