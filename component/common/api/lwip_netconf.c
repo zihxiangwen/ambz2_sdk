@@ -394,7 +394,7 @@ uint8_t LwIP_DHCP(uint8_t idx, uint8_t dhcp_state)
 #else
 				dhcp = pnetif->dhcp;
 #endif
-				restore_wifi_info_to_flash((uint32_t)dhcp->offered_ip_addr.addr, (uint32_t)dhcp->server_ip_addr.addr);
+                                restore_wifi_info_to_flash((uint32_t)dhcp->offered_ip_addr.addr, (uint32_t)dhcp->server_ip_addr.addr);
 #endif
 
 #if CONFIG_WLAN

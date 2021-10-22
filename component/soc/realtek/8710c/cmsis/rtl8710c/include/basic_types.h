@@ -95,9 +95,9 @@ typedef unsigned int            BOOL;
 #ifndef BOOL
 typedef unsigned char           BOOL;
 #endif
-#ifndef bool
-typedef unsigned char           bool;
-#endif
+//#ifndef bool
+//typedef unsigned char           bool;
+//#endif
 #endif
 
 #define UCHAR                   uint8_t
@@ -241,7 +241,7 @@ typedef int             ssize_t;
 #if defined (__ARM_FEATURE_CMSE)
 #if defined( __ICCARM__ )
 #define NS_ENTRY    __attribute__((cmse_nonsecure_entry))
-typedef __cmse_nonsecure_call void nsfunc(void); 
+typedef __cmse_nonsecure_call void nsfunc(void);
 #else
 #define NS_ENTRY    __attribute__((cmse_nonsecure_entry))
 typedef void __attribute__((cmse_nonsecure_call)) nsfunc(void);
@@ -536,5 +536,47 @@ typedef unsigned char	BOOLEAN,*PBOOLEAN;
 #define __extension__		/* Ignore */
 #define	__restrict			/* Ignore */
 #endif
+
+#if defined(CHIP_PROJECT) && CHIP_PROJECT
+#include <assert.h>
+
+extern size_t strnlen(const char *s, size_t count);
+extern void *pvPortMalloc( size_t xWantedSize );
+
+//def
+#ifndef false
+    #define false   0
+#endif
+
+#ifndef true
+    #define true    1
+#endif
+
+#ifndef in_addr_t
+    typedef __uint32_t in_addr_t;
+#endif
+
+//undef
+#ifdef bool
+    #undef bool
+#endif
+
+#ifdef s8
+    #undef s8
+#endif
+
+#ifdef u32
+    #undef u32
+#endif
+
+#ifdef u64
+    #undef u64
+#endif
+
+#ifdef IN
+    #undef IN
+#endif
+
+#endif // defined(CHIP_PROJECT) && CHIP_PROJECT
 
 #endif// __BASIC_TYPES_H__

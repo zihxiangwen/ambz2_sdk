@@ -60,7 +60,7 @@ void rtc_disable_alarm(void);
 
 const static u8 dim[12] = { 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-static inline bool is_leap_year(unsigned int year)
+static inline BOOL is_leap_year(unsigned int year)
 {
     return (!(year % 4) && (year % 100)) || !(year % 400);
 }

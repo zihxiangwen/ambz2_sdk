@@ -27,7 +27,7 @@
 #ifdef inet_pton
 #undef inet_pton
 #endif
-#define LWIP_IPV6 0
+#define LWIP_IPV6 1
 #if LWIP_IPV6
 #define inet_ntop(af,src,dst,size) \
     (((af) == AF_INET6) ? ip6addr_ntoa_r((src),(dst),(size)) \
@@ -82,13 +82,13 @@ void TimerCountdownMS(Timer* timer, unsigned int timeout_ms)
 }
 
 
-void TimerCountdown(Timer* timer, unsigned int timeout) 
+void TimerCountdown(Timer* timer, unsigned int timeout)
 {
 	TimerCountdownMS(timer, timeout * 1000);
 }
 
 
-int TimerLeftMS(Timer* timer) 
+int TimerLeftMS(Timer* timer)
 {
 	xTaskCheckForTimeOut(&timer->xTimeOut, &timer->xTicksToWait); /* updates xTicksToWait to the number left */
 	return (timer->xTicksToWait * portTICK_PERIOD_MS);
@@ -127,9 +127,9 @@ int FreeRTOS_read(Network* n, unsigned char* buffer, int len, int timeout_ms)
 		struct timeval timeout;
 		timeout.tv_sec  = xTicksToWait / 1000;
 		timeout.tv_usec = ( xTicksToWait % 1000 ) * 1000;
-		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(struct timeval)); 
+		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(struct timeval));
 #else
-		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &xTicksToWait, sizeof(xTicksToWait)); 
+		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &xTicksToWait, sizeof(xTicksToWait));
 #endif
 #if (MQTT_OVER_SSL)
 		if (n->use_ssl) {
@@ -176,7 +176,7 @@ int FreeRTOS_write(Network* n, unsigned char* buffer, int len, int timeout_ms)
 		struct timeval timeout;
 		timeout.tv_sec  = xTicksToWait / 1000;
 		timeout.tv_usec = ( xTicksToWait % 1000 ) * 1000;
-		setsockopt(n->my_socket, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(struct timeval)); 
+		setsockopt(n->my_socket, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(struct timeval));
 #else
 		setsockopt(n->my_socket, SOL_SOCKET, SO_SNDTIMEO, &xTicksToWait, sizeof(xTicksToWait));
 #endif
@@ -242,39 +242,39 @@ void NetworkInit(Network* n)
 
 
 #if (MQTT_OVER_SSL)
-static int mqtt_tls_verify( void *data, x509_crt *crt, int depth, int *flags ) 
+static int mqtt_tls_verify( void *data, x509_crt *crt, int depth, int *flags )
 {
-	char buf[1024]; 
+	char buf[1024];
 
-	mqtt_printf(MQTT_DEBUG, "\nVerify requested for (Depth %d):\n", depth ); 
-	x509_crt_info( buf, sizeof( buf ) - 1, "", crt ); 
-	mqtt_printf(MQTT_DEBUG, "%s", buf ); 
+	mqtt_printf(MQTT_DEBUG, "\nVerify requested for (Depth %d):\n", depth );
+	x509_crt_info( buf, sizeof( buf ) - 1, "", crt );
+	mqtt_printf(MQTT_DEBUG, "%s", buf );
 
-	if( ( (*flags) & BADCERT_EXPIRED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! server certificate has expired\n" ); 
+	if( ( (*flags) & BADCERT_EXPIRED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! server certificate has expired\n" );
 
-	if( ( (*flags) & BADCERT_REVOKED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! server certificate has been revoked\n" ); 
+	if( ( (*flags) & BADCERT_REVOKED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! server certificate has been revoked\n" );
 
-	if( ( (*flags) & BADCERT_CN_MISMATCH ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! CN mismatch\n" ); 
+	if( ( (*flags) & BADCERT_CN_MISMATCH ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! CN mismatch\n" );
 
-	if( ( (*flags) & BADCERT_NOT_TRUSTED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! self-signed or not signed by a trusted CA\n" ); 
+	if( ( (*flags) & BADCERT_NOT_TRUSTED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! self-signed or not signed by a trusted CA\n" );
 
-	if( ( (*flags) & BADCRL_NOT_TRUSTED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! CRL not trusted\n" ); 
+	if( ( (*flags) & BADCRL_NOT_TRUSTED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! CRL not trusted\n" );
 
-	if( ( (*flags) & BADCRL_EXPIRED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! CRL expired\n" ); 
+	if( ( (*flags) & BADCRL_EXPIRED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! CRL expired\n" );
 
-	if( ( (*flags) & BADCERT_OTHER ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! other (unknown) flag\n" ); 
+	if( ( (*flags) & BADCERT_OTHER ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! other (unknown) flag\n" );
 
-	if ( ( *flags ) == 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  This certificate has no flags\n" ); 
+	if ( ( *flags ) == 0 )
+		mqtt_printf(MQTT_DEBUG, "  This certificate has no flags\n" );
 
-	return( 0 ); 
+	return( 0 );
 }
 
 static int my_random(void *p_rng, unsigned char *output, size_t output_len)
@@ -294,7 +294,7 @@ int NetworkConnect(Network* n, char* addr, int port)
 	char   str[32];
 	int	keepalive_enable = 1;
 	int keep_idle = 30;
-	
+
 	if(n->my_socket >= 0){
 		n->disconnect(n);
 	}
@@ -319,9 +319,9 @@ int NetworkConnect(Network* n, char* addr, int port)
 		goto exit;
 	}
 	setsockopt( n->my_socket, SOL_SOCKET, SO_KEEPALIVE,
-			(const char *) &keepalive_enable, sizeof( keepalive_enable ) );	
+			(const char *) &keepalive_enable, sizeof( keepalive_enable ) );
 	setsockopt( n->my_socket, IPPROTO_TCP, TCP_KEEPIDLE,
-			(const char *) &keep_idle, sizeof( keep_idle ) );	
+			(const char *) &keep_idle, sizeof( keep_idle ) );
 	if ((retVal = connect(n->my_socket, (struct sockaddr*)&sAddr, sizeof(sAddr))) < 0)
 	{
 		close(n->my_socket);
@@ -474,9 +474,9 @@ int FreeRTOS_read(Network* n, unsigned char* buffer, int len, int timeout_ms)
 		struct timeval timeout;
 		timeout.tv_sec  = xTicksToWait / 1000;
 		timeout.tv_usec = ( xTicksToWait % 1000 ) * 1000;
-		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(struct timeval)); 
+		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(struct timeval));
 #else
-		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &xTicksToWait, sizeof(xTicksToWait)); 
+		setsockopt(n->my_socket, SOL_SOCKET, SO_RCVTIMEO, &xTicksToWait, sizeof(xTicksToWait));
 #endif
 #if (MQTT_OVER_SSL)
 		if (n->use_ssl) {
@@ -523,7 +523,7 @@ int FreeRTOS_write(Network* n, unsigned char* buffer, int len, int timeout_ms)
 		struct timeval timeout;
 		timeout.tv_sec  = xTicksToWait / 1000;
 		timeout.tv_usec = ( xTicksToWait % 1000 ) * 1000;
-		setsockopt(n->my_socket, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(struct timeval)); 
+		setsockopt(n->my_socket, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(struct timeval));
 #else
 		setsockopt(n->my_socket, SOL_SOCKET, SO_SNDTIMEO, &xTicksToWait, sizeof(xTicksToWait));
 #endif
@@ -594,39 +594,39 @@ void NetworkInit(Network* n)
 
 
 #if (MQTT_OVER_SSL)
-static int mqtt_tls_verify( void *data, mbedtls_x509_crt *crt, int depth, int *flags ) 
-{ 
-	char buf[1024]; 
+static int mqtt_tls_verify( void *data, mbedtls_x509_crt *crt, int depth, int *flags )
+{
+	char buf[1024];
 
-	mqtt_printf(MQTT_DEBUG, "\nVerify requested for (Depth %d):\n", depth ); 
-	mbedtls_x509_crt_info( buf, sizeof( buf ) - 1, "", crt ); 
-	mqtt_printf(MQTT_DEBUG, "%s", buf ); 
+	mqtt_printf(MQTT_DEBUG, "\nVerify requested for (Depth %d):\n", depth );
+	mbedtls_x509_crt_info( buf, sizeof( buf ) - 1, "", crt );
+	mqtt_printf(MQTT_DEBUG, "%s", buf );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCERT_EXPIRED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! server certificate has expired\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCERT_EXPIRED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! server certificate has expired\n" );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCERT_REVOKED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! server certificate has been revoked\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCERT_REVOKED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! server certificate has been revoked\n" );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCERT_CN_MISMATCH ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! CN mismatch\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCERT_CN_MISMATCH ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! CN mismatch\n" );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCERT_NOT_TRUSTED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! self-signed or not signed by a trusted CA\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCERT_NOT_TRUSTED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! self-signed or not signed by a trusted CA\n" );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCRL_NOT_TRUSTED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! CRL not trusted\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCRL_NOT_TRUSTED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! CRL not trusted\n" );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCRL_EXPIRED ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! CRL expired\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCRL_EXPIRED ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! CRL expired\n" );
 
-	if( ( (*flags) & MBEDTLS_X509_BADCERT_OTHER ) != 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  ! other (unknown) flag\n" ); 
+	if( ( (*flags) & MBEDTLS_X509_BADCERT_OTHER ) != 0 )
+		mqtt_printf(MQTT_DEBUG, "  ! other (unknown) flag\n" );
 
-	if ( ( *flags ) == 0 ) 
-		mqtt_printf(MQTT_DEBUG, "  This certificate has no flags\n" ); 
+	if ( ( *flags ) == 0 )
+		mqtt_printf(MQTT_DEBUG, "  This certificate has no flags\n" );
 
-	return( 0 ); 
+	return( 0 );
 }
 
 static void* my_calloc(size_t nelements, size_t elementSize)
@@ -660,7 +660,7 @@ int NetworkConnect(Network* n, char* addr, int port)
 	char   str[32];
 	int	keepalive_enable = 1;
 	int keep_idle = 30;
-	
+
 	if(n->my_socket >= 0){
 		n->disconnect(n);
 	}
@@ -685,9 +685,9 @@ int NetworkConnect(Network* n, char* addr, int port)
 		goto exit;
 	}
 	setsockopt( n->my_socket, SOL_SOCKET, SO_KEEPALIVE,
-			(const char *) &keepalive_enable, sizeof( keepalive_enable ) );	
+			(const char *) &keepalive_enable, sizeof( keepalive_enable ) );
 	setsockopt( n->my_socket, IPPROTO_TCP, TCP_KEEPIDLE,
-			(const char *) &keep_idle, sizeof( keep_idle ) );	
+			(const char *) &keep_idle, sizeof( keep_idle ) );
 	if ((retVal = connect(n->my_socket, (struct sockaddr*)&sAddr, sizeof(sAddr))) < 0)
 	{
 		close(n->my_socket);
@@ -708,7 +708,7 @@ int NetworkConnect(Network* n, char* addr, int port)
 		mbedtls_platform_set_calloc_free(my_calloc, vPortFree);
 
 		n->ssl = (mbedtls_ssl_context *) malloc( sizeof(mbedtls_ssl_context) );
-		n->conf = (mbedtls_ssl_config *) malloc( sizeof(mbedtls_ssl_config) );      
+		n->conf = (mbedtls_ssl_config *) malloc( sizeof(mbedtls_ssl_config) );
 		if (( n->ssl == NULL )||( n->conf == NULL )) {
 			mqtt_printf(MQTT_DEBUG, "malloc ssl failed!");
 			goto err;
@@ -727,7 +727,7 @@ int NetworkConnect(Network* n, char* addr, int port)
 
 		mbedtls_ssl_conf_own_cert(n->conf, client_crt, client_rsa);
 		mbedtls_ssl_set_bio(n->ssl, &n->my_socket, mbedtls_net_send, mbedtls_net_recv, NULL);
-		mbedtls_ssl_conf_rng(n->conf, my_random, NULL);	
+		mbedtls_ssl_conf_rng(n->conf, my_random, NULL);
 
 		if((mbedtls_ssl_setup(n->ssl, n->conf)) != 0) {
 			mqtt_printf(MQTT_DEBUG,"mbedtls_ssl_setup failed!");
@@ -780,7 +780,7 @@ int NetworkConnect(Network* n, char* addr, int port)
 				goto err;
 			}
 		}
-	
+
 		retVal = mbedtls_ssl_handshake(n->ssl);
 		if (retVal < 0) {
 			mqtt_printf(MQTT_DEBUG, "ssl handshake failed err:-0x%04X", -retVal);

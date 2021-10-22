@@ -33,13 +33,13 @@
 #include "ctype.h"
 
 /* for GNU C++ */
-#if defined(__GNUC__)
-void* __dso_handle = 0;
-#endif
+//#if defined(__GNUC__)
+//void* __dso_handle = 0;
+//#endif
 
 #if defined(CONFIG_CMSIS_FREERTOS_EN) && (CONFIG_CMSIS_FREERTOS_EN != 0)
 /**************************************************
- * FreeRTOS memory management functions's wrapper to replace 
+ * FreeRTOS memory management functions's wrapper to replace
  * malloc/free/realloc of GCC Lib.
  **************************************************/
 //#include "FreeRTOS.h"
@@ -93,8 +93,8 @@ int __wrap_printf(const char * fmt,...)
 {
 	int count;
     va_list list;
-    va_start(list, fmt);	
-#if defined(CONFIG_BUILD_SECURE)	
+    va_start(list, fmt);
+#if defined(CONFIG_BUILD_SECURE)
 	count = stdio_printf_stubs.printf_corel(stdio_printf_stubs.stdio_port_sputc, (void*)NULL, fmt, list);
 #else
 	count = stdio_printf_stubs.printf_core(stdio_printf_stubs.stdio_port_sputc, (void*)NULL, fmt, list);
@@ -111,7 +111,7 @@ int __wrap_puts(const char *str)
 int __wrap_vprintf(const char *fmt, va_list args)
 {
         int count;
-#if defined(CONFIG_BUILD_SECURE)     
+#if defined(CONFIG_BUILD_SECURE)
         count = stdio_printf_stubs.printf_corel(stdio_printf_stubs.stdio_port_sputc, (void*)NULL, fmt, args);
 #else
         count = stdio_printf_stubs.printf_core(stdio_printf_stubs.stdio_port_sputc, (void*)NULL, fmt, args);
@@ -129,7 +129,7 @@ int __wrap_sprintf(char *buf, const char * fmt,...)
     pnt_buf.pbuf_lim = 0;
 
     va_start(list, fmt);
-#if defined(CONFIG_BUILD_SECURE)		
+#if defined(CONFIG_BUILD_SECURE)
     count = stdio_printf_stubs.printf_corel(stdio_printf_stubs.stdio_port_bufputc, (void *)&pnt_buf, fmt, list);
 #else
 	count = stdio_printf_stubs.printf_core(stdio_printf_stubs.stdio_port_bufputc, (void *)&pnt_buf, fmt, list);
@@ -138,7 +138,7 @@ int __wrap_sprintf(char *buf, const char * fmt,...)
     va_end(list);
 	(void)list;
 
-    return count;	
+    return count;
 }
 
 int __wrap_snprintf(char *buf, size_t size, const char *fmt,...)
@@ -160,7 +160,7 @@ int __wrap_snprintf(char *buf, size_t size, const char *fmt,...)
     va_end(list);
 	(void)list;
 
-    return count;	
+    return count;
 }
 
 int __wrap_vsnprintf(char *buf, size_t size, const char *fmt, va_list args)
@@ -177,7 +177,7 @@ int __wrap_vsnprintf(char *buf, size_t size, const char *fmt, va_list args)
 #endif
     *(pnt_buf.pbuf) = 0;
 
-    return count;	
+    return count;
 }
 
 
@@ -346,7 +346,7 @@ int __wrap_atoi(const char *num)
 #else
 	int c;
 	long total;
-	int sign; 
+	int sign;
 	char *nptr = (char *)num;
 
 	/* skip whitespace */
@@ -368,7 +368,7 @@ int __wrap_atoi(const char *num)
 		return -total;
 	else
 		return total;
-#endif	
+#endif
 }
 
 unsigned int __wrap_atoui(const char *num)
@@ -396,14 +396,14 @@ unsigned long long __wrap_atoull(const char *num)
 double __wrap_atof(const char *str)
 {
 	return atof(str);
-}	
+}
 
 void __wrap_abort(void)
 {
 	__wrap_printf("\n\rabort execution\n\r");
 	while(1);
 }
-  
+
 #if defined(__GNUC__)
 #include <errno.h>
 
@@ -501,8 +501,8 @@ typedef struct __tzinfo_struct
 /* Shared timezone information for libc/time functions.  */
 static __tzinfo_type tzinfo = {1, 0,
 { {'J', 0, 0, 0, 0, (time_t)0, 0L },
-  {'J', 0, 0, 0, 0, (time_t)0, 0L } 
-  } 
+  {'J', 0, 0, 0, 0, (time_t)0, 0L }
+  }
 };
 
 __tzinfo_type *
@@ -581,7 +581,7 @@ struct tm * __wrap_localtime (const time_t * tim_p)
 
 #elif defined (__ICCARM__) //because IAR does not have _reent structure
   __ATTRIBUTES struct tm * __iar_Ttotm64(struct tm *, __time64_t, int);
-  struct tm* tm = __iar_Ttotm64(0, *tim_p + (__time64_t) _Tzoff(), -1);  
+  struct tm* tm = __iar_Ttotm64(0, *tim_p + (__time64_t) _Tzoff(), -1);
   return gmtime64_r (tim_p, tm);
 #endif
 }
