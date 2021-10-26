@@ -152,7 +152,6 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated
-INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common
 INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/main/include
 INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/build/chip/gen/include
@@ -183,7 +182,7 @@ SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
+SRC_CPP += $(CHIPDIR)/src/app/server/Dnssd.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/CommissioningWindowManager.cpp
@@ -216,7 +215,7 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/content-launch-server/content-launch-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/media-playback-server/media-playback-server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/temperature-measurement-server/temperature-measurement-server.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/clusters/temperature-measurement-server/temperature-measurement-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/scenes/scenes.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/basic/basic.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/bindings/bindings.cpp
@@ -245,8 +244,8 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/window-covering-server/window-covering-se
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
-SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
-SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
@@ -257,6 +256,7 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/IMClusterComm
 SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClusters.cpp
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/cluster-objects.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/DeviceCallbacks.cpp
