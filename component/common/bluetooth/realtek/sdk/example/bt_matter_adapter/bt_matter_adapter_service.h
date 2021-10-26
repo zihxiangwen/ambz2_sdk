@@ -22,7 +22,7 @@ extern "C"  {
 /* Add Includes here */
 #include <profile_server.h>
 #include "bt_matter_adapter_config.h"
-#include "simple_ble_service.h"
+#include "complete_ble_service.h"
 
 /** @defgroup SIMP_Service Simple Ble Service
   * @brief Simple BLE service

@@ -2047,6 +2047,11 @@ void fATSt(void *arg)
 {
 	/* To avoid gcc warnings */
 	( void ) arg;
+
+	printf("xPortGetTotalHeapSize = %d \n",xPortGetTotalHeapSize());
+	printf("xPortGetFreeHeapSize = %d \n",xPortGetFreeHeapSize());
+	printf("xPortGetMinimumEverFreeHeapSize = %d \n",xPortGetMinimumEverFreeHeapSize());
+
 	deinitPref();
 	AT_PRINTK("[ATS#]: _AT_SYSTEM_TEST_");
 }

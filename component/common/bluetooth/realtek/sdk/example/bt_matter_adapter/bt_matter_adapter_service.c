@@ -18,13 +18,7 @@
 #include <gap.h>
 #include <diag.h>
 #include "platform_stdlib.h"
-
-#define SIMPLE_BLE_SERVICE_CHAR_V1_READ_INDEX           0x02
-#define SIMPLE_BLE_SERVICE_CHAR_V2_WRITE_INDEX          0x05
-#define SIMPLE_BLE_SERVICE_CHAR_V3_NOTIFY_INDEX         0x07
-#define SIMPLE_BLE_SERVICE_CHAR_V4_INDICATE_INDEX       0x0a
-#define SIMPLE_BLE_SERVICE_CHAR_NOTIFY_CCCD_INDEX       (SIMPLE_BLE_SERVICE_CHAR_V3_NOTIFY_INDEX + 1)
-#define SIMPLE_BLE_SERVICE_CHAR_INDICATE_CCCD_INDEX     (SIMPLE_BLE_SERVICE_CHAR_V4_INDICATE_INDEX + 1)
+#include "utility.h"
 
 #define BT_MATTER_ADAPTER_SERVICE_CHAR_V1_READ_WRITE_INDEX           0x02
 //#define UUID_RX	0x18, 0xEE, 0x2E, 0xF5, 0x26, 0x3D, 0x45, 0x59, 0x95, 0x9F, 0x4F, 0x9C, 0x42, 0x9F, 0x9D, 0x11
@@ -326,6 +320,7 @@ const T_FUN_GATT_SERVICE_CBS bt_matter_adapter_service_cbs =
   */
 T_SERVER_ID bt_matter_adapter_service_add_service(void *p_func)
 {
+    dump_bytes(bt_matter_adapter_service_tbl, sizeof(bt_matter_adapter_service_tbl));
     if (false == server_add_service(&bt_matter_adapter_service_id,
                                     (uint8_t *)bt_matter_adapter_service_tbl,
                                     sizeof(bt_matter_adapter_service_tbl),

@@ -149,6 +149,12 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
+INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
+INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app
+INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/main/include
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -156,11 +162,8 @@ INCLUDES += -I$(CHIPDIR)/third_party/nlassert/repo/include
 INCLUDES += -I$(CHIPDIR)/src/app
 INCLUDES += -I$(CHIPDIR)/src/app/util
 INCLUDES += -I$(CHIPDIR)/src/app/server
+INCLUDES += -I$(CHIPDIR)/src/controller/data_model
 INCLUDES += -I$(CHIPDIR)/third_party/nlio/repo/include
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/main/include
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/third_party/nlunit-test/repo/src
 
 # Source file list
@@ -178,14 +181,11 @@ SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
-SRC_CPP += $(CHIPDIR)/src/app/common/gen/attributes/Accessors.cpp
-
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/RendezvousServer.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/StorablePeerConnection.cpp
+SRC_CPP += $(CHIPDIR)/src/app/server/CommissioningWindowManager.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/util/af-event.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/af-main-common.cpp
@@ -205,10 +205,11 @@ SRC_CPP += $(CHIPDIR)/src/app/util/message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-cluster-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
+SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/clusters/on-off-server/on-off-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/level-control/level-control.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/identify/identify.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/identify-server/identify-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/barrier-control-server/barrier-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
@@ -234,16 +235,24 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/test-cluster-server/test-cluster-server.c
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/pump-configuration-and-control-server/pump-configuration-and-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/window-covering-server/window-covering-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
 SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/attribute-size.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/callback-stub.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/CHIPClientCallbacks.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/CHIPClusters.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/gen/IMClusterCommandHandler.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/attribute-size.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClientCallbacks.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/callback-stub.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/IMClusterCommandHandler.cpp
+SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClusters.cpp
+
+SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/DeviceCallbacks.cpp
