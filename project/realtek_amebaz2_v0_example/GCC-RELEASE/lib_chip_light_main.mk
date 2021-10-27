@@ -182,7 +182,7 @@ SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
-SRC_CPP += $(CHIPDIR)/src/app/server/Mdns.cpp
+SRC_CPP += $(CHIPDIR)/src/app/server/Dnssd.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/OnboardingCodesUtil.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/CommissioningWindowManager.cpp
@@ -233,8 +233,8 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagno
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/ota-provider/ota-provider.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
-SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
-SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
