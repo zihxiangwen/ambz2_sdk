@@ -242,6 +242,8 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_netw
 SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/window-covering-server/window-covering-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/mode-select-server/mode-select-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/mode-select-server/static-supported-modes-manager.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 #SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
