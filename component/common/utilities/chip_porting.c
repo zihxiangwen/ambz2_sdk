@@ -125,11 +125,11 @@ int _vTaskDelay( const TickType_t xTicksToDelay )
    if wear leveling enabled, the total module number is 12 + 2*12 + 3*12 = 36, the size is 288k"
 */
 #define DCT_BEGIN_ADDR_MATTER   DCT_BEGIN_ADDR    /*!< DCT begin address of flash, ex: 0x100000 = 1M */
-#define MODULE_NUM              12                /*!< max number of module */
+#define MODULE_NUM              24                /*!< max number of module */
 #define VARIABLE_NAME_SIZE      32                /*!< max size of the variable name */
 #define VARIABLE_VALUE_SIZE     1860 + 4          /*!< max size of the variable value
                                                   /*!< max value number in moudle = 4024 / (32 + 1860+4) = 2 */
-#define ENABLE_BACKUP           1
+#define ENABLE_BACKUP           0
 #define ENABLE_WEAR_LEVELING    0
 
 int32_t initPref(void)
@@ -224,8 +224,6 @@ BOOL checkExist(char *domain, char *key)
         printf("%s not found.\n", key);
     else if(ret == DCT_SUCCESS)
         printf("%s found.\n", key);
-    else
-        goto exit;
 
     dct_close_module(&handle);
 
