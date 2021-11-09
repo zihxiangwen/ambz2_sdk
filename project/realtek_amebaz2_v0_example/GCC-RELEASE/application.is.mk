@@ -694,6 +694,8 @@ all: LIBFLAGS += -Wl,--start-group -L../../../component/soc/realtek/8710c/misc/b
 mp: LIBFLAGS += -Wl,--start-group -L../../../component/soc/realtek/8710c/misc/bsp/lib/common/GCC -l_soc_is -l_wlan_mp -Wl,--end-group
 LIBFLAGS += -L../../../component/soc/realtek/8710c/misc/bsp/lib/common/GCC -l_http -l_dct -l_eap -l_p2p -l_websocket -l_wps -l_mdns
 #LIBFLAGS += -L../../../component/soc/realtek/8710c/misc/bsp/lib/common/GCC -l_coap
+LIBFLAGS += -Wl,--start-group -L../../../component/soc/realtek/8710c/misc/bsp/lib/common/GCC -l_main -lCHIP -Wl,--end-group
+
  
 
 RAMALL_BIN =
@@ -706,7 +708,7 @@ include toolchain.mk
 
 .PHONY: application_is
 application_is: prerequirement $(SRC_O) $(SRAM_O) $(ERAM_O) $(SRC_OO)
-	$(LD) $(LFLAGS) -o $(BIN_DIR)/$(TARGET).axf $(OBJ_CPP_LIST) $(OBJ_LIST) $(ROMIMG) $(LIBFLAGS) -l_main -lCHIP -lstdc++ -T$(LDSCRIPT)
+	$(LD) $(LFLAGS) -o $(BIN_DIR)/$(TARGET).axf $(OBJ_CPP_LIST) $(OBJ_LIST) $(ROMIMG) $(LIBFLAGS) -lstdc++ -T$(LDSCRIPT)
 	$(OBJCOPY) -j .bluetooth_trace.text -Obinary $(BIN_DIR)/$(TARGET).axf $(BIN_DIR)/APP.trace
 	$(OBJCOPY) -R .bluetooth_trace.text $(BIN_DIR)/$(TARGET).axf 
 	$(OBJDUMP) -d $(BIN_DIR)/$(TARGET).axf > $(BIN_DIR)/$(TARGET).asm

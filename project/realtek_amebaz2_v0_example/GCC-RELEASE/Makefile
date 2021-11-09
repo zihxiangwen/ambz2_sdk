@@ -49,6 +49,11 @@ otap: toolchain
 	@$(MAKE) -f lib_chip_otap_core.mk all
 	@$(MAKE) -f lib_chip_otap_main.mk all
 
+.PHONY: otar
+otar: toolchain
+	@$(MAKE) -f lib_chip_otar_core.mk all
+	@$(MAKE) -f lib_chip_otar_main.mk all
+
 .PHONY: is
 is: toolchain
 	@$(MAKE) -f application.is.mk
@@ -65,6 +70,8 @@ clean:
 	@$(MAKE) -f lib_chip_light_main.mk clean
 	@$(MAKE) -f lib_chip_otap_core.mk clean
 	@$(MAKE) -f lib_chip_otap_main.mk clean
+	@$(MAKE) -f lib_chip_otar_core.mk clean
+	@$(MAKE) -f lib_chip_otar_main.mk clean
 	@$(MAKE) -f application.is.mk clean
 
 debug: toolchain

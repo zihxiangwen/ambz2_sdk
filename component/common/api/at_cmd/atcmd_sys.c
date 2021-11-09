@@ -2027,8 +2027,15 @@ void fATSM(void *arg)
 }
 #endif
 
+#define MATTER_OTA_REQUESTOR_APP 1
+
 extern void ChipTest(void);
 extern int32_t deinitPref(void);
+#ifdef MATTER_OTA_REQUESTOR_APP
+extern void amebaQueryImageCmdHandler(char * ipAddress, uint32_t nodeId);
+extern void amebaApplyUpdateCmdHandler(char * ipAddress, uint32_t nodeId);
+#endif
+
 void chipapp(void *param)
 {
 	ChipTest();
@@ -2041,6 +2048,44 @@ void fATchipapp(void *arg)
 	xTaskCreate(chipapp, "chipapp",
                                 4096 / sizeof(StackType_t), NULL,
                                 1, NULL);
+}
+
+void fATchipapp1(void *arg)
+{
+	(void) arg;
+#ifdef MATTER_OTA_REQUESTOR_APP
+	// ATS%=192.168.0.101,12344321
+	unsigned char *argv[MAX_ARGC] = {0};
+	char * gipAddress[20];
+	uint32_t gnodeId;
+
+	printf("Chip Test: amebaQueryImageCmdHandler\r\n");
+
+	parse_param(arg, argv);
+	strcpy(gipAddress,argv[1]);
+	gnodeId = atoi(argv[2]);
+
+	amebaQueryImageCmdHandler(gipAddress, gnodeId);
+#endif
+}
+
+void fATchipapp2(void *arg)
+{
+	(void) arg;
+#ifdef MATTER_OTA_REQUESTOR_APP
+	// ATS^=192.168.0.101,12344321
+	unsigned char *argv[MAX_ARGC] = {0};
+	char * gipAddress[20];
+	uint32_t gnodeId;
+
+	printf("Chip Test: amebaApplyUpdateCmdHandler\r\n");
+
+	parse_param(arg, argv);
+	strcpy(gipAddress,argv[1]);
+	gnodeId = atoi(argv[2]);
+
+	amebaApplyUpdateCmdHandler(gipAddress, gnodeId);
+#endif
 }
 
 void fATSt(void *arg)
@@ -2865,6 +2910,8 @@ log_item_t at_sys_items[] = {
 	{"ATS!", fATSc,{NULL,NULL}},	// Debug config setting
 	{"ATS#", fATSt,{NULL,NULL}},	// test command
 	{"ATS$", fATchipapp, {NULL, NULL}},
+	{"ATS%", fATchipapp1, {NULL, NULL}},
+	{"ATS^", fATchipapp2, {NULL, NULL}},
 	{"ATS?", fATSx,{NULL,NULL}},	// Help
 #if WIFI_LOGO_CERTIFICATION_CONFIG
 	{"ATSV", fATSV},				// Write SW version for wifi logo test
