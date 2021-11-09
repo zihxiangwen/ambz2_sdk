@@ -226,6 +226,9 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/admini
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/mode-select-server/mode-select-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/mode-select-server/static-supported-modes-manager.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/identify-server/identify-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/scenes/scenes.cpp
 
 #Specific clusters for lighting product
 #SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
