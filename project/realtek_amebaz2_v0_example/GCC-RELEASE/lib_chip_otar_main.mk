@@ -154,8 +154,8 @@ INCLUDES += -I$(CHIPDIR)/zzz_generated/ota-requestor-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/ota-requestor-app/zap-generated
 INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/examples/ota-requestor-app
-INCLUDES += -I$(CHIPDIR)/examples/ota-requestor-app/ota-requestor-common
 INCLUDES += -I$(CHIPDIR)/examples/ota-requestor-app/ameba/main/include
+INCLUDES += -I$(CHIPDIR)/examples/ota-requestor-app/ota-requestor-common
 INCLUDES += -I$(CHIPDIR)/examples/ota-requestor-app/ameba/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
@@ -182,7 +182,7 @@ SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
 SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
-SRC_CPP += $(CHIPDIR)/src/app/device/OperationalDeviceProxy.cpp
+#SRC_CPP += $(CHIPDIR)/src/app/device/OperationalDeviceProxy.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Dnssd.cpp
@@ -216,6 +216,8 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/operational-credentials-server/operationa
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning-ember.cpp
 
+SRC_CPP += $(CHIPDIR)/src/lib/dnssd/minimal_mdns/records/IP.cpp
+
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
@@ -231,8 +233,8 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/ota-requestor-app/zap-generated/IMClusterCom
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/ota-requestor-app/ota-requestor-common/ExampleOTARequestor.cpp
-SRC_CPP += $(CHIPDIR)/examples/ota-requestor-app/ota-requestor-common/BDXDownloader.cpp
 
+SRC_CPP += $(CHIPDIR)/examples/ota-requestor-app/ameba/main/BDXDownloader.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-requestor-app/ameba/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-requestor-app/ameba/main/DeviceCallbacks.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-requestor-app/ameba/main/CHIPDeviceManager.cpp

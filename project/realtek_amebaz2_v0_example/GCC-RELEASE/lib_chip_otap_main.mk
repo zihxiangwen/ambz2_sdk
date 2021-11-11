@@ -154,8 +154,8 @@ INCLUDES += -I$(CHIPDIR)/zzz_generated/ota-provider-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/ota-provider-app/zap-generated
 INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/examples/ota-provider-app
-INCLUDES += -I$(CHIPDIR)/examples/ota-provider-app/ota-provider-common
 INCLUDES += -I$(CHIPDIR)/examples/ota-provider-app/ameba/main/include
+INCLUDES += -I$(CHIPDIR)/examples/ota-provider-app/ota-provider-common
 INCLUDES += -I$(CHIPDIR)/examples/ota-provider-app/ameba/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
@@ -209,6 +209,8 @@ SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
+SRC_CPP += $(CHIPDIR)/src/lib/dnssd/minimal_mdns/records/IP.cpp
+
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general-commissioning-server/general-commissioning-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/operational-credentials-server/operational-credentials-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning.cpp
@@ -230,9 +232,9 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/ota-provider-app/zap-generated/IMClusterComm
 	
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
-SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ota-provider-common/BdxOtaSender.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ota-provider-common/OTAProviderExample.cpp
 
+SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ameba/main/BdxOtaSender.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ameba/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ameba/main/DeviceCallbacks.cpp
 SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ameba/main/CHIPDeviceManager.cpp
