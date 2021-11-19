@@ -6,7 +6,7 @@ SHELL = /bin/bash
 BASEDIR := $(shell pwd)
 AMEBAZ2_TOOLDIR	= $(BASEDIR)/../../../component/soc/realtek/8710c/misc/iar_utility
 CHIPDIR = $(BASEDIR)/../../../third_party/connectedhomeip
-OUTPUT_DIR = $(CHIPDIR)/examples/lighting-app/ambd/build/chip
+OUTPUT_DIR = $(CHIPDIR)/examples/lighting-app/ameba/build/chip
 
 OS := $(shell uname)
 
@@ -69,7 +69,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/src/
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/src/include/lwip
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/port/realtek
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freertos
-#INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/mbedtls-2.4.0/include
+INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/mbedtls-matter
 #INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/ssl_ram_map/rom
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/include
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/src/osdep
@@ -154,8 +154,8 @@ INCLUDES += -I$(CHIPDIR)/zzz_generated/lighting-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/lighting-app/zap-generated
 INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/examples/lighting-app/lighting-common
-INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ambd/main/include
-INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ambd/build/chip/gen/include
+INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ameba/main/include
+INCLUDES += -I$(CHIPDIR)/examples/lighting-app/ameba/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -207,6 +207,8 @@ SRC_CPP += $(CHIPDIR)/src/app/util/process-global-message.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/util.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
+SRC_CPP += $(CHIPDIR)/src/lib/dnssd/minimal_mdns/responders/IP.cpp
+
 SRC_CPP += $(CHIPDIR)/src/app/clusters/basic/basic.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/bindings/bindings.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
@@ -224,17 +226,10 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_
 SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
-
-#Specific clusters for lighting product
-#SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/clusters/identify/identify.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/clusters/scenes/scenes.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/clusters/groups-server/groups-server.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/clusters/ota-provider/ota-provider.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/identify-server/identify-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/descriptor/descriptor.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
-#SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting-default-configuration.cpp
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
@@ -244,11 +239,11 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/IMClusterCommandH
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/chipinterface.cpp
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/DeviceCallbacks.cpp
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/CHIPDeviceManager.cpp
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/Globals.cpp
-SRC_CPP += $(CHIPDIR)/examples/lighting-app/ambd/main/LEDWidget.cpp
+SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/chipinterface.cpp
+SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/DeviceCallbacks.cpp
+SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/CHIPDeviceManager.cpp
+SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/Globals.cpp
+SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/LEDWidget.cpp
 
 #lib_version
 VER_C += $(TARGET)_version.c
@@ -282,8 +277,8 @@ CFLAGS += -DV8M_STKOVF
 # CHIP options
 # -------------------------------------------------------------------
 CFLAGS += -DCHIP_PROJECT=1
-CFLAGS += -DCHIP_DEVICE_LAYER_TARGET=AMBD
-CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls/mbedtls_config.h\"
+CFLAGS += -DCHIP_DEVICE_LAYER_TARGET=Ameba
+CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls_config.h\"
 
 CFLAGS += -DLWIP_IPV6_ND=1
 CFLAGS += -DLWIP_IPV6_SCOPES=0
