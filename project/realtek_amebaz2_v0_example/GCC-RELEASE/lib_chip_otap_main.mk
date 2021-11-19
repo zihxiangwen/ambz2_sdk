@@ -211,6 +211,16 @@ SRC_CPP += $(CHIPDIR)/src/app/util/error-mapping.cpp
 
 SRC_CPP += $(CHIPDIR)/src/lib/dnssd/minimal_mdns/records/IP.cpp
 
+SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/basic/basic.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/bindings/bindings.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/descriptor/descriptor.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/diagnostic-logs-server/diagnostic-logs-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general-commissioning-server/general-commissioning-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/operational-credentials-server/operational-credentials-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning.cpp
@@ -229,8 +239,6 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/ota-provider-app/zap-generated/CHIPClusters.
 #SRC_CPP += $(CHIPDIR)/zzz_generated/ota-provider-app/zap-generated/CHIPClustersWrite.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/ota-provider-app/zap-generated/encoder.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/ota-provider-app/zap-generated/IMClusterCommandHandler.cpp
-	
-SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/ota-provider-app/ota-provider-common/OTAProviderExample.cpp
 

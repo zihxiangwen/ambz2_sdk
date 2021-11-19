@@ -545,6 +545,7 @@ typedef unsigned char	BOOLEAN,*PBOOLEAN;
 #include <assert.h>
 
 extern size_t strnlen(const char *s, size_t count);
+extern size_t strlcpy(char *dst, char const *src, size_t s);
 extern void *pvPortMalloc( size_t xWantedSize );
 
 //def
