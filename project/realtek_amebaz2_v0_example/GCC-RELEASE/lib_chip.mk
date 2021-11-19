@@ -6,7 +6,7 @@ SHELL = /bin/bash
 BASEDIR := $(shell pwd)
 AMEBAZ2_TOOLDIR	= $(BASEDIR)/../../../component/soc/realtek/8710c/misc/iar_utility
 CHIPDIR = $(BASEDIR)/../../../third_party/connectedhomeip
-OUTPUT_DIR = $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip
+OUTPUT_DIR = $(CHIPDIR)/examples/all-clusters-app/ameba/build/chip
 
 OS := $(shell uname)
 
@@ -64,7 +64,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/src/
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/src/include/lwip
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/port/realtek
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freertos
-#INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/mbedtls-2.4.0/include
+INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/mbedtls-matter
 #INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/ssl_ram_map/rom
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/include
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/src/osdep
@@ -144,8 +144,8 @@ INCLUDES += -I$(BASEDIR)/../../../component/os/os_dep/include
 
 # CHIP Include folder list
 # -------------------------------------------------------------------
-INCLUDES += -I$(CHIPDIR)/config/ambd
-INCLUDES += -I$(CHIPDIR)/src/include/platform/AMBD
+INCLUDES += -I$(CHIPDIR)/config/ameba
+INCLUDES += -I$(CHIPDIR)/src/include/platform/Ameba
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -178,8 +178,8 @@ endif
 # CHIP options
 # -------------------------------------------------------------------
 CFLAGS += -DCHIP_PROJECT=1
-CFLAGS += -DCHIP_DEVICE_LAYER_TARGET=AMBD
-CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls/mbedtls_config.h\"
+CFLAGS += -DCHIP_DEVICE_LAYER_TARGET=Ameba
+CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls_config.h\"
 
 CFLAGS += -DLWIP_IPV6_ND=1
 CFLAGS += -DLWIP_IPV6_SCOPES=0
@@ -231,15 +231,15 @@ GENERATE_NINJA:
 	echo "import(\"//args.gni\")"          >> $(OUTPUT_DIR)/args.gn
 	echo target_cflags_c  = [$(foreach word,$(CHIP_CFLAGS),\"$(word)\",)] | sed -e 's/=\"/=\\"/g;s/\"\"/\\"\"/g;'  >> $(OUTPUT_DIR)/args.gn
 	echo target_cflags_cc = [$(foreach word,$(CHIP_CXXFLAGS),\"$(word)\",)] | sed -e 's/=\"/=\\"/g;s/\"\"/\\"\"/g;'   >> $(OUTPUT_DIR)/args.gn
-	echo ambd_ar = \"arm-none-eabi-ar\"    >> $(OUTPUT_DIR)/args.gn
-	echo ambd_cc = \"arm-none-eabi-gcc\"   >> $(OUTPUT_DIR)/args.gn
-	echo ambd_cxx = \"arm-none-eabi-c++\"  >> $(OUTPUT_DIR)/args.gn
-	echo ambd_cpu = \"ambd\"               >> $(OUTPUT_DIR)/args.gn
+	echo ameba_ar = \"arm-none-eabi-ar\"    >> $(OUTPUT_DIR)/args.gn
+	echo ameba_cc = \"arm-none-eabi-gcc\"   >> $(OUTPUT_DIR)/args.gn
+	echo ameba_cxx = \"arm-none-eabi-c++\"  >> $(OUTPUT_DIR)/args.gn
+	echo ameba_cpu = \"ameba\"               >> $(OUTPUT_DIR)/args.gn
 	cd $(CHIPDIR) && PW_ENVSETUP_QUIET=1 . scripts/activate.sh
-	sed -i 's/chip_build_tests\ =\ true/chip_build_tests\ =\ false/g' $(CHIPDIR)/config/ambd/args.gni
-	mkdir -p $(CHIPDIR)/config/ambd/components/chip
-	cd $(CHIPDIR)/config/ambd/components/chip && gn gen --check --fail-on-unused-args $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip
-	cd $(CHIPDIR)/config/ambd/components/chip ; ninja -C $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip
+	sed -i 's/chip_build_tests\ =\ true/chip_build_tests\ =\ false/g' $(CHIPDIR)/config/ameba/args.gni
+	mkdir -p $(CHIPDIR)/config/ameba/components/chip
+	cd $(CHIPDIR)/config/ameba/components/chip && gn gen --check --fail-on-unused-args $(CHIPDIR)/examples/all-clusters-app/ameba/build/chip
+	cd $(CHIPDIR)/config/ameba/components/chip ; ninja -C $(CHIPDIR)/examples/all-clusters-app/ameba/build/chip
 	cp -f $(OUTPUT_DIR)/lib/* $(BASEDIR)/../../../component/soc/realtek/8710c/misc/bsp/lib/common/GCC
 #*****************************************************************************#
 #              CLEAN GENERATED FILES                                          #

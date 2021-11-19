@@ -65,7 +65,7 @@ INCLUDES += -I../inc
 INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include
 INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/include/mbedtls
 INCLUDES += -I$(CHIPDIR)/third_party/mbedtls/repo/library
-INCLUDES += -I$(CHIPDIR)/config/ambd
+INCLUDES += -I../../../component/common/network/ssl/mbedtls-matter
 
 INCLUDES += -I../../../component/common/api
 INCLUDES += -I../../../component/common/api/at_cmd
@@ -642,7 +642,7 @@ CFLAGS += -DCONFIG_SYSTEM_TIME64=0
 endif
 
 CFLAGS += -DCHIP_PROJECT=0
-CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls/mbedtls_config.h\"
+CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls_config.h\"
 
 CPPFLAGS := $(CFLAGS)
 CPPFLAGS += -fno-use-cxa-atexit

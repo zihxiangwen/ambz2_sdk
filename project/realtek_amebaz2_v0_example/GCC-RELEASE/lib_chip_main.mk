@@ -6,7 +6,7 @@ SHELL = /bin/bash
 BASEDIR := $(shell pwd)
 AMEBAZ2_TOOLDIR	= $(BASEDIR)/../../../component/soc/realtek/8710c/misc/iar_utility
 CHIPDIR = $(BASEDIR)/../../../third_party/connectedhomeip
-OUTPUT_DIR = $(CHIPDIR)/examples/all-clusters-app/ambd/build/chip
+OUTPUT_DIR = $(CHIPDIR)/examples/all-clusters-app/ameba/build/chip
 
 OS := $(shell uname)
 
@@ -69,7 +69,7 @@ INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/src/
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/src/include/lwip
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/port/realtek
 INCLUDES += -I$(BASEDIR)/../../../component/common/network/lwip/lwip_v2.1.2/port/realtek/freertos
-#INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/mbedtls-2.4.0/include
+INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/mbedtls-matter
 #INCLUDES += -I$(BASEDIR)/../../../component/common/network/ssl/ssl_ram_map/rom
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/include
 INCLUDES += -I$(BASEDIR)/../../../component/common/drivers/wlan/realtek/src/osdep
@@ -153,8 +153,9 @@ INCLUDES += -I$(CHIPDIR)/zzz_generated/app-common
 INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app
 INCLUDES += -I$(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated
 INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/main/include
-INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ambd/build/chip/gen/include
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/all-clusters-common/include
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ameba/main/include
+INCLUDES += -I$(CHIPDIR)/examples/all-clusters-app/ameba/build/chip/gen/include
 INCLUDES += -I$(CHIPDIR)/src/include
 INCLUDES += -I$(CHIPDIR)/src/lib
 INCLUDES += -I$(CHIPDIR)/src
@@ -242,6 +243,17 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_netw
 SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/window-covering-server/window-covering-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/mode-select-server/mode-select-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/application-basic-server/application-basic-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/audio-output-server/audio-output-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/keypad-input-server/keypad-input-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/application-launcher-server/application-launcher-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/tv-channel-server/tv-channel-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/media-input-server/media-input-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/target-navigator-server/target-navigator-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/account-login-server/account-login-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/thermostat-user-interface-configuration-server/thermostat-user-interface-configuration-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/thermostat-server/thermostat-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 #SRC_CPP += $(CHIPDIR)/src/app/reporting/reporting.cpp
@@ -258,11 +270,14 @@ SRC_CPP += $(CHIPDIR)/zzz_generated/all-clusters-app/zap-generated/CHIPClusters.
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/cluster-objects.cpp
 
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/chipinterface.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/DeviceCallbacks.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/CHIPDeviceManager.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/Globals.cpp
-SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ambd/main/LEDWidget.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/src/bridged-actions-stub.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/all-clusters-common/src/static-supported-modes-manager.cpp
+
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ameba/main/chipinterface.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ameba/main/DeviceCallbacks.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ameba/main/CHIPDeviceManager.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ameba/main/Globals.cpp
+SRC_CPP += $(CHIPDIR)/examples/all-clusters-app/ameba/main/LEDWidget.cpp
 
 
 #lib_version
@@ -297,8 +312,8 @@ CFLAGS += -DV8M_STKOVF
 # CHIP options
 # -------------------------------------------------------------------
 CFLAGS += -DCHIP_PROJECT=1
-CFLAGS += -DCHIP_DEVICE_LAYER_TARGET=AMBD
-CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls/mbedtls_config.h\"
+CFLAGS += -DCHIP_DEVICE_LAYER_TARGET=Ameba
+CFLAGS += -DMBEDTLS_CONFIG_FILE=\"mbedtls_config.h\"
 
 CFLAGS += -DLWIP_IPV6_ND=1
 CFLAGS += -DLWIP_IPV6_SCOPES=0
