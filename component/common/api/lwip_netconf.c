@@ -229,7 +229,7 @@ extern write_reconnect_ptr p_write_reconnect_ptr;
 extern struct wlan_fast_reconnect wifi_data_to_flash;
 extern uint32_t offer_ip;
 extern uint32_t server_ip;
-extern u8 is_the_same_ap;
+extern uint8_t is_the_same_ap;
 
 #endif
 
