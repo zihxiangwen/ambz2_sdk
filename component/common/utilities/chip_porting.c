@@ -207,29 +207,48 @@ exit:
 
 BOOL checkExist(char *domain, char *key)
 {
-    dct_handle_t handle;
-    int32_t ret = -1;
-    uint16_t DataLen = 0;
-    uint8_t *str = malloc(sizeof(uint8_t) * VARIABLE_VALUE_SIZE);
+	dct_handle_t handle;
+	int32_t ret = -1;
+	uint16_t len = 0;
+	uint8_t found = 0;
+	uint8_t *str = malloc(sizeof(uint8_t) * VARIABLE_VALUE_SIZE-4);
 
-    ret = dct_open_module(&handle, key);
-    if (ret != DCT_SUCCESS){
-        printf("%s : dct_open_module(%s) failed\n",__FUNCTION__,key);
-        goto exit;
-    }
+	ret = dct_open_module(&handle, key);
+	if (ret != DCT_SUCCESS){
+		//printf("%s : dct_open_module(%s) failed\n",__FUNCTION__,key);
+		goto exit;
+	}
 
-    ret = dct_get_variable_new(&handle, key, str, &DataLen);
+	if(found == 0)
+	{
+		len = sizeof(uint32_t);
+		ret = dct_get_variable_new(&handle, key, (char *)str, &len);
+		if(ret == DCT_SUCCESS)
+		{
+			printf("checkExist key=%s found.\n",key);
+			found = 1;
+		}
+	}
 
-    if(ret == DCT_ERR_NOT_FIND)
-        printf("%s not found.\n", key);
-    else if(ret == DCT_SUCCESS)
-        printf("%s found.\n", key);
+	if(found == 0)
+	{
+		len = sizeof(uint64_t);
+		ret = dct_get_variable_new(&handle, key, (char *)str, &len);
+		if(ret == DCT_SUCCESS)
+		{
+			printf("checkExist key=%s found.\n",key);
+			found = 1;
+		}
+	}
 
-    dct_close_module(&handle);
+	if(found == 0)
+		printf("checkExist key=%s not found. ret=%d\n",key ,ret);
+
+	dct_close_module(&handle);
 
 exit:
     free(str);
-    return (DCT_SUCCESS == ret ? 1 : 0);
+    return found;
 }
 
 int32_t setPref_new(char *domain, char *key, uint8_t *value, size_t byteCount)
