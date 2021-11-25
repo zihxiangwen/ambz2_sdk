@@ -116,7 +116,7 @@
 #define CONFIG_INCLUDE_SIMPLE_CONFIG		1
 #define CONFIG_INCLUDE_DPP_CONFIG		0
 /*For fast reconnection*/
-#define CONFIG_EXAMPLE_WLAN_FAST_CONNECT	0
+#define CONFIG_EXAMPLE_WLAN_FAST_CONNECT	1
 #if CONFIG_EXAMPLE_WLAN_FAST_CONNECT
 #define CONFIG_FAST_DHCP 1
 #else
@@ -389,6 +389,6 @@
 #define CONFIG_MIIO_MP		0 //miio mp test and rw private data
 #endif
 
-#define CONFIG_EXAMPLE_MATTER 0
+#define CONFIG_EXAMPLE_MATTER 1
 
 #endif
