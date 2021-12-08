@@ -50,7 +50,7 @@ If you already have a checkout, run the following command to sync submodules rec
 
     output : ambz2_sdk/component/soc/realtek/8710c/misc/bsp/lib/common/GCC
 	
-    > libCHIP.a, ibCoreTests.a, ibChipCryptoTests.a, ibRawTransportTests.a...
+    > libCHIP.a
 
 ### CHIP application (generate by [lib_chip_main.mk](https://github.com/hank820/ambz2_sdk/blob/matter/project/realtek_amebaz2_v0_example/GCC-RELEASE/lib_chip_main.mk)))
 
@@ -61,117 +61,77 @@ If you already have a checkout, run the following command to sync submodules rec
 ## Make Ameba application
     cd ambz2_sdk/project/realtek_amebaz2_v0_example/GCC-RELEASE
 
-    make is
+    make is -j4
 
 ## Flash Image
     ambz2_sdk/project/realtek_amebaz2_v0_example/GCC-RELEASE/application_is/Debug/bin/flash_is.bin
 
+Find more detail in [application_note](https://github.com/hank820/ambz2_sdk/blob/matter/doc/AN0500%20Realtek%20Ameba-ZII%20application%20note.en.pdf) Chapter4
+
 ## Run CHIP task on AmebaZ2 (all-cluster-app/lighting-app example)
-### Bypass Rendezvous
-* In "connectedhomeip/config/ambd/args.gni"
-	* set `chip_bypass_rendezvous = true`
-	* Set `chip_ip_commissioning = false`
-	* Set `chip_use_clusters_for_ip_commissioning = false`
-	* Set `chip_config_network_layer_ble = false`
 
-* In "connectedhomeip/src/platform/AMBD/CHIPDevicePlatformConfig.h"
-	* Set `#define CONFIG_USE_CLUSTERS_FOR_IP_COMMISSIONING	0`
-	* Set `#define CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE 0`
+	Matter task will auto start after reset the device.
 
-* Build and Flash
 
-### IP Commissioning
-* In "connectedhomeip/config/ambd/args.gni"vim 
-	* Set `chip_ip_commissioning = true`
-	* Set `chip_use_clusters_for_ip_commissioning = true`
-	* Set `chip_config_network_layer_ble = false`
 
-* In "connectedhomeip/src/platform/AMBD/CHIPDevicePlatformConfig.h"
-	* Set `#define CONFIG_USE_CLUSTERS_FOR_IP_COMMISSIONING	1`
-	* Set `#define CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE 0`
-
-* Build and Flash
-
-### BLE Commissioning
-* In "connectedhomeip/config/ambd/args.gni"
-	* Set `chip_ip_commissioning = false`
-	* Set `chip_use_clusters_for_ip_commissioning = false`
-	* Set `chip_config_network_layer_ble = true`
-
-* In "connectedhomeip/src/platform/AMBD/CHIPDevicePlatformConfig.h"
-	* Set `#define CONFIG_USE_CLUSTERS_FOR_IP_COMMISSIONING	0`
-	* Set `#define CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE 1`
-
-* Build and Flash
 
 ## Test with [chip-tool](https://github.com/hank820/connectedhomeip/tree/master/examples/chip-tool)
 Use standalone chip-tool app(linux) to communicate with the device.
 
 In order to send commands to a device, it must be commissioned with the client. chip-tool currently only supports commissioning and remembering one device at a time. The configuration state is stored in `/tmp/chip_tool_config.ini`; deleting this and other `.ini` files in `/tmp` can sometimes resolve issues due to stale configuration.
 
-### Bypass Rendezvous
+### Commission a device over BLE
 
-* Enter the ATCMD `ATS$`
-* Connect to AP using `ATW0, ATW1, ATWC` commands
-* Run CHIP-TOOL IP commissioning command `./chip-tool pairing bypass XXX.XXX.XXX.XXX 5540 (Ameba IP)`
+* Run CHIP-TOOL IP commissioning command `./chip-tool pairing ble-wifi ${NODE_ID_TO_ASSIGN} ${SSID} ${PASSWORD} 20202021 3840`
+* For example: `./chip-tool pairing ble-wifi 12344321 testssid password 20202021 3840`
 
-### IP Commissioning
+### Pair a device over IP
 
-* Enter the ATCMD `ATS$`
-* Connect to AP using `ATW0, ATW1, ATWC` commands
-* Run CHIP-TOOL IP commissioning command `./chip-tool pairing onnetwork 0 20202021 3840 XXX.XXX.XXX.XXX 5540 (Ameba IP)`
-
-### BLE Commissioning
-
-* Enter the ATCMD `ATS$`
-* Run CHIP-TOOL IP commissioning command `./chip-tool pairing ble-wifi SSID PASSWORD 0 20202021 3840`
+* Connect to AP using after matter task by `ATW0, ATW1, ATWC` commands
+* Run CHIP-TOOL IP commissioning command `./chip-tool pairing onnetwork ${NODE_ID_TO_ASSIGN} 20202021`
+* For example: `./chip-tool pairing onnetwork 12344321 20202021`
 
 ### Command for onoff cluster
 
 Use PA_20 as output, connect a LED to this pin and GND.
 
-* Run CHIP-TOOL on-off cluster command `./chip-tool onoff on 1`
+* Run CHIP-TOOL on-off cluster command `./chip-tool onoff on 12344321 1`
 
-* Run CHIP-TOOL on-off cluster command `./chip-tool onoff off 1`
-    
-### Command for doorlock cluster
+* Run CHIP-TOOL on-off cluster command `./chip-tool onoff off 12344321 1`
 
-Get doork lock cluster command on Ameba
 
-* Run CHIP-TOOL on-off cluster command `./chip-tool doorlock lock-door 1 1`
-    
-* Run CHIP-TOOL on-off cluster command `./chip-tool doorlock unlock-door 1 1`
+Find more detail in [chip-tool](https://github.com/hank820/connectedhomeip/tree/master/examples/chip-tool)
 
 ## Test with [Python Controller](https://github.com/hank820/connectedhomeip/blob/master/docs/guides/python_chip_controller_building.md)
 To build the Python Controller (linux), run the following command.
 
-	./scripts/build_python.sh --clusters_for_ip_commissioning true --chip_mdns platform
+	./scripts/build_python.sh --chip_mdns platform
 
 To launch Python Controller, activate the python environment first.
 	
 	source out/python_env/bin/activate
 	chip-device-ctrl
 
-### IP Commissioning
-* Enter the ATCMD `ATS$`
-* Connect to AP using `ATW0, ATW1, ATWC` commands
-* Run python controller IP commissioning command `chip-device-ctrl > connect -ip <IP> 20202021 135246`
-* Resolve DNS-SD name and update address of the node in the device controller. Get fabric ID using get-fabricid and use the decimal value of compressed fabric id. `chip-device-ctrl > get-fabricid`
-* Resolve mDNS `chip-device-ctrl > resolve <Compressed Fabric ID> 135246`
-* On-Off cluster command `chip-device-ctrl >zcl OnOff On 135246 1 1`
-* On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`
-
-### BLE Commissioning
-* Enter the ATCMD `ATS$`
+### Commission a device over BLE
+* Power on device and wait matter task run
 * Run python controller BLE commissioning command `chip-device-ctrl > connect -ble 3840 20202021 135246`
 * Provide network credentials `chip-device-ctrl > zcl NetworkCommissioning AddWiFiNetwork 135246 0 0 ssid=str:TESTSSID credentials=str:TESTPASSWD breadcrumb=0 timeoutMs=1000`
 * Connect to AP `chip-device-ctrl > zcl NetworkCommissioning EnableNetwork 135246 0 0 networkID=str:TESTSSID breadcrumb=0 timeoutMs=1000`
 * Close the BLE connection `chip-device-ctrl > close-ble`
-* Resolve DNS-SD name and update address of the node in the device controller. Get fabric ID using get-fabricid and use the decimal value of compressed fabric id. `chip-device-ctrl > get-fabricid`
+* Resolve DNS-SD name and update address of the node in the device controller. `chip-device-ctrl > resolve 135246`
 
-* Resolve mDNS `chip-device-ctrl >resolve <Compressed Fabric ID> 135246`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff On 135246 1 1`
 * On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`
+
+### Pair a device over IP
+* Power on device and wait matter task run
+* Connect to AP using `ATW0, ATW1, ATWC` commands
+* Run python controller IP commissioning command `chip-device-ctrl > connect -ip <IP> 20202021 135246`
+* Resolve DNS-SD name and update address of the node in the device controller. `chip-device-ctrl > resolve 135246`
+* On-Off cluster command `chip-device-ctrl >zcl OnOff On 135246 1 1`
+* On-Off cluster command `chip-device-ctrl >zcl OnOff Off 135246 1 1`
+
+
 
 ## Test with [Android Chip-Tool](https://github.com/hank820/connectedhomeip/tree/master/src/android/CHIPTool)
 
@@ -180,7 +140,8 @@ To launch Python Controller, activate the python environment first.
 * Launch Android Studio: `cd android-studio/bin` and run `./studio.sh`
 * Go to **Customize** and **All settings**. Under **Appearance & Behaviour** >> **System Settings** >> **Android SDK**, Check **Android 5.0 (Lollipop)** and uncheck the rest. Default Android SDK location is at `~/Android/Sdk`.
 
-### Build Android Chip-Tool APK
+### Preparing for build
+
 Run the following commands
 
 	cd connectedhomeip/
@@ -199,23 +160,91 @@ architecture:
 | x86         | x86        |
 | x86_64      | x64        |
 
-<hr>
+Complete the following steps to prepare the Matter build:
 
-According to your smartphone's CPU architecture, run the command below
+1. Check out the Matter repository.
 
-	TARGET_CPU={TARGET_CPU} ./scripts/examples/android_app.sh
-	
-To build the apk file, use one of the two options below.
-1. Launch Android Studio again using `./studio.sh` and open project in `connectedhomeip/src/android/CHIPTool/`. Go to **File** >> **Sync Project with Gradle Files**, and then **Build** >> **Make Project**.
-2. Run the following commands from the top CHIP directory
+2. Run bootstrap (**only required first time**)
 
-        cd src/android/CHIPTool
-        ./gradlew build
+    ```shell
+    source scripts/bootstrap.sh
+    ```
+
+3. Choose how you want to build the Android CHIPTool. There are **two** ways:
+   from script, or from source within Android Studio.
+
+<a name="building-scripts"></a>
+
+### Building Android CHIPTool from scripts
+
+This is the simplest option. In the command line, run the following command from
+the top CHIP directory:
+
+```shell
+./scripts/build/build_examples.py --target android-arm64-chip-tool build
+```
+
+See the table above for other values of `TARGET_CPU`.
 
 The debug Android package `app-debug.apk` will be generated at
-`src/android/CHIPTool/app/build/outputs/apk/debug/`.
+`out/android-$TARGET_CPU-chip-tool/outputs/apk/debug/`, and can be installed
+with
+
+```shell
+adb install out/android-$TARGET_CPU-chip-tool/outputs/apk/debug/app-debug.apk
+```
+
+You can use Android Studio to edit the Android CHIPTool app itself and run it
+after build_examples.py, but you will not be able to edit Matter Android code
+from `src/controller/java`, or other Matter C++ code within Android Studio.
+
+<a name="building-studio"></a>
+
+### Building Android CHIPTool from Android Studio
+
+This option allows Android Studio to build the core Matter code from source,
+which allows us to directly edit core Matter code in-IDE.
+
+1. In the command line, run the following command from the top Matter directory:
+
+    ```shell
+    TARGET_CPU=arm64 ./scripts/examples/android_app_ide.sh
+    ```
+
+    See the table above for other values of `TARGET_CPU`.
+
+2. Modify the `matterSdkSourceBuild` variable to true, `matterBuildSrcDir` point
+   to the appropriate output directory (e.g. `../../../../out/android_arm64`),
+   and `matterSourceBuildAbiFilters` to the desired ABIs in
+   [src/android/CHIPTool/gradle.properties](https://github.com/project-chip/connectedhomeip/blob/master/src/android/CHIPTool/gradle.properties)
+
+3) Open the project in Android Studio and run **Sync Project with Gradle
+   Files**.
+
+4) Use one of the following options to build an Android package:
+
+    - Click **Make Project** in Android Studio.
+    - Run the following command in the command line:
+
+        ```shell
+        cd src/android/CHIPTool
+        ./gradlew build
+        ```
+
+The debug Android package `app-debug.apk` will be generated at
+`src/android/CHIPTool/app/build/outputs/apk/debug/`, and can be installed with
+
+```shell
+adb install src/android/CHIPTool/app/build/outputs/apk/debug/app-debug.apk
+```
+
+or
+
+```shell
+(cd src/android/CHIPTool && ./gradlew installDebug)
+```
 
 ### BLE Commissioning
-* Enter the ATCMD `ATS$` and go to the url generated, which will show a QR Code
+* Power on device and wait matter task run
 * Launch Android Chip-Tool app and press **Provision CHIP Device With Wi-Fi**
 * Scan the QR Code and enter the network credentials of the AP
