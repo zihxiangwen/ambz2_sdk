@@ -172,14 +172,6 @@ INCLUDES += -I$(CHIPDIR)/third_party/nlunit-test/repo/src
 SRC_C =
 
 SRC_CPP = 
-SRC_CPP += $(CHIPDIR)/src/app/Command.cpp
-SRC_CPP += $(CHIPDIR)/src/app/CommandHandler.cpp
-SRC_CPP += $(CHIPDIR)/src/app/CommandSender.cpp
-SRC_CPP += $(CHIPDIR)/src/app/decoder.cpp
-SRC_CPP += $(CHIPDIR)/src/app/encoder-common.cpp
-SRC_CPP += $(CHIPDIR)/src/app/InteractionModelEngine.cpp
-SRC_CPP += $(CHIPDIR)/src/app/ReadClient.cpp
-SRC_CPP += $(CHIPDIR)/src/app/ReadHandler.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/server/EchoHandler.cpp
 SRC_CPP += $(CHIPDIR)/src/app/server/Dnssd.cpp
@@ -189,7 +181,6 @@ SRC_CPP += $(CHIPDIR)/src/app/server/CommissioningWindowManager.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/util/af-event.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/af-main-common.cpp
-SRC_CPP += $(CHIPDIR)/src/app/util/attribute-list-byte-span.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/attribute-size-util.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/attribute-storage.cpp
 SRC_CPP += $(CHIPDIR)/src/app/util/attribute-table.cpp
@@ -233,11 +224,8 @@ SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 
 SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
-SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/attribute-size.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/callback-stub.cpp
 SRC_CPP += $(CHIPDIR)/zzz_generated/lighting-app/zap-generated/IMClusterCommandHandler.cpp
-
-SRC_CPP += $(CHIPDIR)/zzz_generated/app-common/app-common/zap-generated/attributes/Accessors.cpp
 
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/chipinterface.cpp
 SRC_CPP += $(CHIPDIR)/examples/lighting-app/ameba/main/DeviceCallbacks.cpp
