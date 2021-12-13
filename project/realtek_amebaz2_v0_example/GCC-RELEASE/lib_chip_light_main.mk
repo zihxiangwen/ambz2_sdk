@@ -211,14 +211,15 @@ SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioni
 SRC_CPP += $(CHIPDIR)/src/app/clusters/network-commissioning/network-commissioning-ember.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/color-control-server/color-control-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/occupancy-sensor-server/occupancy-sensor-server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet_network_diagnostics_server/ethernet_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/software_diagnostics_server/software_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/thread_network_diagnostics_server/thread_network_diagnostics_server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi_network_diagnostics_server/wifi_network_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/ethernet-network-diagnostics-server/ethernet-network-diagnostics-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/software-diagnostics-server/software-diagnostics-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/thread-network-diagnostics-server/thread-network-diagnostics-server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/wifi-network-diagnostics-server/wifi-network-diagnostics-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/administrator-commissioning-server/administrator-commissioning-server.cpp
-SRC_CPP += $(CHIPDIR)/src/app/clusters/general_diagnostics_server/general_diagnostics_server.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/general-diagnostics-server/general-diagnostics-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/identify-server/identify-server.cpp
 SRC_CPP += $(CHIPDIR)/src/app/clusters/descriptor/descriptor.cpp
+SRC_CPP += $(CHIPDIR)/src/app/clusters/fixed-label-server/fixed-label-server.cpp
 
 SRC_CPP += $(CHIPDIR)/src/app/reporting/Engine.cpp
 
