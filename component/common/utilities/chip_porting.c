@@ -125,11 +125,11 @@ int _vTaskDelay( const TickType_t xTicksToDelay )
    if wear leveling enabled, the total module number is 12 + 2*12 + 3*12 = 36, the size is 288k"
 */
 #define DCT_BEGIN_ADDR_MATTER   DCT_BEGIN_ADDR    /*!< DCT begin address of flash, ex: 0x100000 = 1M */
-#define MODULE_NUM              12                /*!< max number of module */
+#define MODULE_NUM              24                /*!< max number of module */
 #define VARIABLE_NAME_SIZE      32                /*!< max size of the variable name */
 #define VARIABLE_VALUE_SIZE     1860 + 4          /*!< max size of the variable value
                                                   /*!< max value number in moudle = 4024 / (32 + 1860+4) = 2 */
-#define ENABLE_BACKUP           1
+#define ENABLE_BACKUP           0
 #define ENABLE_WEAR_LEVELING    0
 
 int32_t initPref(void)
@@ -207,31 +207,59 @@ exit:
 
 BOOL checkExist(char *domain, char *key)
 {
-    dct_handle_t handle;
-    int32_t ret = -1;
-    uint16_t DataLen = 0;
-    uint8_t *str = malloc(sizeof(uint8_t) * VARIABLE_VALUE_SIZE);
+	dct_handle_t handle;
+	int32_t ret = -1;
+	uint16_t len = 0;
+	uint8_t found = 0;
+	uint8_t *str = malloc(sizeof(uint8_t) * VARIABLE_VALUE_SIZE-4);
 
-    ret = dct_open_module(&handle, key);
-    if (ret != DCT_SUCCESS){
-        printf("%s : dct_open_module(%s) failed\n",__FUNCTION__,key);
-        goto exit;
-    }
+	ret = dct_open_module(&handle, key);
+	if (ret != DCT_SUCCESS){
+		//printf("%s : dct_open_module(%s) failed\n",__FUNCTION__,key);
+		goto exit;
+	}
 
-    ret = dct_get_variable_new(&handle, key, str, &DataLen);
+	if(found == 0)
+	{
+		len = sizeof(uint32_t);
+		ret = dct_get_variable_new(&handle, key, (char *)str, &len);
+		if(ret == DCT_SUCCESS)
+		{
+			printf("checkExist key=%s found.\n",key);
+			found = 1;
+		}
+	}
 
-    if(ret == DCT_ERR_NOT_FIND)
-        printf("%s not found.\n", key);
-    else if(ret == DCT_SUCCESS)
-        printf("%s found.\n", key);
-    else
-        goto exit;
+	if(found == 0)
+	{
+		len = sizeof(uint64_t);
+		ret = dct_get_variable_new(&handle, key, (char *)str, &len);
+		if(ret == DCT_SUCCESS)
+		{
+			printf("checkExist key=%s found.\n",key);
+			found = 1;
+		}
+	}
 
-    dct_close_module(&handle);
+	if(found == 0)
+	{
+		len = VARIABLE_VALUE_SIZE - 4;
+        ret = dct_get_variable_new(&handle, key, (char *)str, &len);
+		if(ret == DCT_SUCCESS)
+		{
+			printf("checkExist key=%s found.\n",key);
+			found = 1;
+		}
+	}
+
+	if(found == 0)
+		printf("checkExist key=%s not found. ret=%d\n",key ,ret);
+
+	dct_close_module(&handle);
 
 exit:
     free(str);
-    return (DCT_SUCCESS == ret ? 1 : 0);
+    return found;
 }
 
 int32_t setPref_new(char *domain, char *key, uint8_t *value, size_t byteCount)
