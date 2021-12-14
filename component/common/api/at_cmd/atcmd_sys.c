@@ -2049,7 +2049,7 @@ void fATSt(void *arg)
 	( void ) arg;
 
 	printf("xPortGetTotalHeapSize = %d \n",xPortGetTotalHeapSize());
-    printf("xPortGetFreeHeapSize = %d \n",xPortGetFreeHeapSize());
+	printf("xPortGetFreeHeapSize = %d \n",xPortGetFreeHeapSize());
 	printf("xPortGetMinimumEverFreeHeapSize = %d \n",xPortGetMinimumEverFreeHeapSize());
 
 	deinitPref();
@@ -2059,6 +2059,20 @@ void fATSt(void *arg)
     Erase_Fastconnect_data();
     printf("Erased Fast Connect data\r\n");
 #endif
+}
+
+extern BOOL checkExist(char *domain, char *key);
+void fATchipapp1(void *arg)
+{
+	if(checkExist("Fabric1","Fabric1") == 1)
+		printf("Fabric1 exist\n");
+	else
+		printf("Fabric1 not exist\n");
+
+	if(checkExist("Fabric2","Fabric2") == 1)
+		printf("Fabric2 exist\n");
+	else
+		printf("Fabric2 not exist\n");
 }
 
 #if defined(CONFIG_PLATFORM_8711B)
@@ -2865,6 +2879,7 @@ log_item_t at_sys_items[] = {
 	{"ATS!", fATSc,{NULL,NULL}},	// Debug config setting
 	{"ATS#", fATSt,{NULL,NULL}},	// test command
 	{"ATS$", fATchipapp, {NULL, NULL}},
+	{"ATS%", fATchipapp1, {NULL, NULL}},
 	{"ATS?", fATSx,{NULL,NULL}},	// Help
 #if WIFI_LOGO_CERTIFICATION_CONFIG
 	{"ATSV", fATSV},				// Write SW version for wifi logo test
