@@ -77,6 +77,7 @@ INCLUDES += -I../../../component/common/api/network/include
 INCLUDES += -I../../../component/common/application
 INCLUDES += -I../../../component/common/application/mqtt/MQTTClient
 INCLUDES += -I../../../component/common/example
+INCLUDES += -I../../../component/common/example/matter_task
 INCLUDES += -I../../../component/common/file_system
 INCLUDES += -I../../../component/common/file_system/dct
 INCLUDES += -I../../../component/common/file_system/fatfs
